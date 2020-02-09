@@ -1,7 +1,8 @@
 package dev.alex.game;
 import java.awt.Graphics;
+
 import java.awt.image.BufferStrategy;
-import dev.alex.game.Display;
+import dev.alex.game.display.Display;
 
 public class Game implements Runnable { //Anfang von Klasse.
 	

@@ -1,6 +1,9 @@
 package dev.alex.game;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
-
+import java.awt.Image;
+import java.awt.Polygon;
 import java.awt.image.BufferStrategy;
 import dev.alex.game.display.Display;
 
@@ -42,7 +45,37 @@ public class Game implements Runnable { //Anfang von Klasse.
 		g = bs.getDrawGraphics();
 		//Drawing
 		
-		g.fillRect(0, 0, width, height);
+		Color black = new Color(0, 0, 0);
+		Color blue = new Color(0, 255, 255);
+		String lastColor = "black";
+		int x = 0;
+		int y = 0;
+		
+		for (int i = 0; i < 6; i++) {
+			if(((x/50)%2) == 0) {
+				if (lastColor == "black") {
+					g.setColor(blue);
+					lastColor = "blue";
+				} else {
+					g.setColor(black);
+					lastColor = "black";
+				}
+			}
+			x = 0;
+			for (int j = 0; j < 6; j++) {
+				if (lastColor == "black") {
+					g.setColor(blue);
+					lastColor = "blue";
+				} else {
+					g.setColor(black);
+					lastColor = "black";
+				}
+	
+				g.fillRect(x, y, 50, 50);
+				x = x + 50;
+			}
+			y = y + 50;
+		}
 		
 		//End of Drawing
 		bs.show();

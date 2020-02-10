@@ -48,11 +48,12 @@ public class Game implements Runnable { //Anfang von Klasse.
 		Color black = new Color(0, 0, 0);
 		Color blue = new Color(0, 255, 255);
 		String lastColor = "black";
+		int rectSize = 40;
 		int x = 0;
 		int y = 0;
 		
 		while (y < height) {
-			if(((x/50)%2) == 0) {				// Checks whether x is even.
+			if(((x/rectSize)%2) == 0) {				// Checks whether x is even.
 				if (lastColor == "black") {
 					g.setColor(blue);
 					lastColor = "blue";
@@ -71,10 +72,10 @@ public class Game implements Runnable { //Anfang von Klasse.
 					lastColor = "black";
 				}
 	
-				g.fillRect(x, y, 50, 50);
-				x = x + 50;
+				g.fillRect(x, y, rectSize, rectSize);
+				x = x + rectSize;
 			}
-			y = y + 50;
+			y = y + rectSize;
 		}
 		
 		//End of Drawing

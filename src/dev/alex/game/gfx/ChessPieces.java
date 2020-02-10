@@ -4,8 +4,6 @@ import dev.alex.game.gfx.SpriteSheet;
 
 public class ChessPieces {
 	
-	private BufferedImage chessSheet;
-	
 	public BufferedImage whiteKing;
 	public  BufferedImage whiteQueen;
 	public  BufferedImage whiteBishop;
@@ -20,12 +18,10 @@ public class ChessPieces {
 	public  BufferedImage blackRook;
 	public  BufferedImage blackPawn;
 	
-	public ChessPieces() {
-		this.chessSheet = ImageLoader.loadImage("/textures/chess.png");
-	}
 	
+		
 	private BufferedImage loadChessPiece(int x, int y, int width, int height) {
-		return new SpriteSheet(chessSheet).crop(x, y, width, height);
+		return new SpriteSheet(ImageLoader.loadImage("/textures/chess.png")).crop(x, y, width, height);
 	}
 
 	public void loadAll() {

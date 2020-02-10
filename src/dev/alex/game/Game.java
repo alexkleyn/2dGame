@@ -51,8 +51,8 @@ public class Game implements Runnable { //Anfang von Klasse.
 		int x = 0;
 		int y = 0;
 		
-		for (int i = 0; i < 6; i++) {
-			if(((x/50)%2) == 0) {
+		while (y < height) {
+			if(((x/50)%2) == 0) {				// Checks whether x is even.
 				if (lastColor == "black") {
 					g.setColor(blue);
 					lastColor = "blue";
@@ -62,7 +62,7 @@ public class Game implements Runnable { //Anfang von Klasse.
 				}
 			}
 			x = 0;
-			for (int j = 0; j < 6; j++) {
+			while (x < width) {
 				if (lastColor == "black") {
 					g.setColor(blue);
 					lastColor = "blue";

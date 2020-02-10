@@ -1,11 +1,9 @@
 package dev.alex.game;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Polygon;
 import java.awt.image.BufferStrategy;
 import dev.alex.game.display.Display;
+import dev.alex.game.gfx.ChessPieces;
 
 public class Game implements Runnable { //Anfang von Klasse.
 	
@@ -16,6 +14,7 @@ public class Game implements Runnable { //Anfang von Klasse.
 	private boolean running = false;
 	private Thread thread;
 	
+	private ChessPieces chessPieces;
 	private BufferStrategy bs;
 	private Graphics g;
 	
@@ -30,6 +29,8 @@ public class Game implements Runnable { //Anfang von Klasse.
 	
 	private void init() {
 		display = new Display(title, width, height);
+		chessPieces = new ChessPieces();
+		chessPieces.loadAll();
 	}
 	
 	private void tick() {
@@ -43,42 +44,46 @@ public class Game implements Runnable { //Anfang von Klasse.
 			return;
 		}
 		g = bs.getDrawGraphics();
-		//Drawing
+		g.clearRect(0, 0, width, height);
 		
-		Color black = new Color(0, 0, 0);
-		Color blue = new Color(0, 255, 255);
-		String lastColor = "black";
-		int rectSize = 40;
-		int x = 0;
-		int y = 0;
-		
-		while (y < height) {
-			if(((x/rectSize)%2) == 0) {				// Checks whether x is even.
-				if (lastColor == "black") {
-					g.setColor(blue);
-					lastColor = "blue";
-				} else {
-					g.setColor(black);
-					lastColor = "black";
+		//Drawing	
+			Color black = new Color(50, 50, 50);
+			Color blue = new Color(200, 200, 200);
+			String lastColor = "black";
+			int rectSize = 50;
+			int x = 0;
+			int y = 0;
+			
+			
+			while (y < height) {
+				if(((x/rectSize)%2) == 0) {				// Checks whether x is even.
+					if (lastColor == "black") {
+						g.setColor(blue);
+						lastColor = "blue";
+					} else {
+						g.setColor(black);
+						lastColor = "black";
+					}
 				}
-			}
-			x = 0;
-			while (x < width) {
-				if (lastColor == "black") {
-					g.setColor(blue);
-					lastColor = "blue";
-				} else {
-					g.setColor(black);
-					lastColor = "black";
-				}
-	
-				g.fillRect(x, y, rectSize, rectSize);
-				x = x + rectSize;
-			}
-			y = y + rectSize;
-		}
+				x = 0;
+				while (x < width) {
+					if (lastColor == "black") {
+						g.setColor(blue);
+						lastColor = "blue";
+					} else {
+						g.setColor(black);
+						lastColor = "black";
+					}
 		
+					g.fillRect(x, y, rectSize, rectSize);
+					x = x + rectSize;
+				}
+				y = y + rectSize;
+			}
+			
+			g.drawImage(chessPieces.blackRook, 0, 0, null);
 		//End of Drawing
+		
 		bs.show();
 		g.dispose();
 	}

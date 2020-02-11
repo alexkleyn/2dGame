@@ -1,4 +1,4 @@
-package dev.alex.game.gfx;
+package dev.alex.game.gfx.chessGfx;
 
 public class Position {
 	

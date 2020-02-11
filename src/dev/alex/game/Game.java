@@ -1,11 +1,9 @@
 package dev.alex.game;
 import java.awt.Color;
-
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import dev.alex.game.display.Display;
-import dev.alex.game.gfx.ImgS;
-import dev.alex.game.gfx.pS;
+import dev.alex.game.gfx.chessGfx.ImgS;
 
 public class Game implements Runnable { //Anfang von Klasse.
 	
@@ -19,11 +17,14 @@ public class Game implements Runnable { //Anfang von Klasse.
 	private ImgS img;
 	private Display display;
 	private BufferStrategy bs;
-	private Graphics g;
+	public static Graphics g;
 	
 
 	
+	
+	
 	private void render() {
+
 		bs = display.getCanvas().getBufferStrategy();
 		if(bs == null) {
 			display.getCanvas().createBufferStrategy(3);
@@ -43,49 +44,93 @@ public class Game implements Runnable { //Anfang von Klasse.
 		g.dispose();
 	}
 	
-	
-	private void drawPieces() {
-
-		g.drawImage(ImgS.ImgWhiteKing, pS.pWhiteKing.getX(), pS.pWhiteKing.getY(), null);
-		g.drawImage(ImgS.ImgWhiteQueen, pS.pWhiteQueen.getX(), pS.pWhiteQueen.getY(), null);
-		g.drawImage(ImgS.ImgWhiteBishop, pS.pWhiteBishop.getX(), pS.pWhiteBishop.getY(), null);
-		g.drawImage(ImgS.ImgWhiteBishop, pS.pWhiteBishop2.getX(), pS.pWhiteBishop2.getY(), null);
-		g.drawImage(ImgS.ImgWhiteKnight, pS.pWhiteKnight.getX(), pS.pWhiteKnight.getY(), null);
-		g.drawImage(ImgS.ImgWhiteKnight, pS.pWhiteKnight2.getX(), pS.pWhiteKnight2.getY(), null);
-		g.drawImage(ImgS.ImgWhiteRook, pS.pWhiteRook.getX(), pS.pWhiteRook.getY(), null);
-		g.drawImage(ImgS.ImgWhiteRook, pS.pWhiteRook2.getX(), pS.pWhiteRook2.getY(), null);
-		
-		g.drawImage(ImgS.ImgWhitePawn, pS.pWhitePawn.getX(), pS.pWhitePawn.getY(), null);
-		g.drawImage(ImgS.ImgWhitePawn, pS.pWhitePawn2.getX(), pS.pWhitePawn2.getY(), null);
-		g.drawImage(ImgS.ImgWhitePawn, pS.pWhitePawn3.getX(), pS.pWhitePawn3.getY(), null);
-		g.drawImage(ImgS.ImgWhitePawn, pS.pWhitePawn4.getX(), pS.pWhitePawn4.getY(), null);
-		g.drawImage(ImgS.ImgWhitePawn, pS.pWhitePawn5.getX(), pS.pWhitePawn5.getY(), null);
-		g.drawImage(ImgS.ImgWhitePawn, pS.pWhitePawn6.getX(), pS.pWhitePawn6.getY(), null);
-		g.drawImage(ImgS.ImgWhitePawn, pS.pWhitePawn7.getX(), pS.pWhitePawn7.getY(), null);
-		g.drawImage(ImgS.ImgWhitePawn, pS.pWhitePawn8.getX(), pS.pWhitePawn8.getY(), null);
-		
-		g.drawImage(ImgS.ImgBlackKing, pS.pBlackKing.getX(), pS.pBlackKing.getY(), null);
-		g.drawImage(ImgS.ImgBlackQueen, pS.pBlackQueen.getX(), pS.pBlackQueen.getY(), null);
-		g.drawImage(ImgS.ImgBlackBishop, pS.pBlackBishop.getX(), pS.pBlackBishop.getY(), null);
-		g.drawImage(ImgS.ImgBlackBishop, pS.pBlackBishop2.getX(), pS.pBlackBishop2.getY(), null);
-		g.drawImage(ImgS.ImgBlackKnight, pS.pBlackKnight.getX(), pS.pBlackKnight.getY(), null);
-		g.drawImage(ImgS.ImgBlackKnight, pS.pBlackKnight2.getX(), pS.pBlackKnight2.getY(), null);
-		g.drawImage(ImgS.ImgBlackRook, pS.pBlackRook.getX(), pS.pBlackRook.getY(), null);
-		g.drawImage(ImgS.ImgBlackRook, pS.pBlackRook2.getX(), pS.pBlackRook2.getY(), null);
-		
-		g.drawImage(ImgS.ImgBlackPawn, pS.pBlackPawn.getX(), pS.pBlackPawn.getY(), null);
-		g.drawImage(ImgS.ImgBlackPawn, pS.pBlackPawn2.getX(), pS.pBlackPawn2.getY(), null);
-		g.drawImage(ImgS.ImgBlackPawn, pS.pBlackPawn3.getX(), pS.pBlackPawn3.getY(), null);
-		g.drawImage(ImgS.ImgBlackPawn, pS.pBlackPawn4.getX(), pS.pBlackPawn4.getY(), null);
-		g.drawImage(ImgS.ImgBlackPawn, pS.pBlackPawn5.getX(), pS.pBlackPawn5.getY(), null);
-		g.drawImage(ImgS.ImgBlackPawn, pS.pBlackPawn6.getX(), pS.pBlackPawn6.getY(), null);
-		g.drawImage(ImgS.ImgBlackPawn, pS.pBlackPawn7.getX(), pS.pBlackPawn7.getY(), null);
-		g.drawImage(ImgS.ImgBlackPawn, pS.pBlackPawn8.getX(), pS.pBlackPawn8.getY(), null);
+	private void tick() {
+		if (PieceS.blackPawn.p.getY() < 150)
+			PieceS.blackPawn.p.setY(PieceS.blackPawn.p.getY() + 1);
 	}
 	
-	private void tick() {
+	
+	
+	private void init() {
 
+
+		display = new Display(title, width, height);
+		ImgS.loadAll(50, 50);
+	}
+	
+	public Game(String title, int width, int height) {
+		this.width = width;
+		this.height = height;
+		this.title = title;
+	}
+	
+	public void run() {
+		init();
+		while(running) {
+			tick();
+			render();
+		}
+		stop();
+	}
+	
+	
+	public synchronized void start() {
+		if(running)
+			return;
+		running = true;
+		thread = new Thread(this);
+		thread.start(); 					// calls "run" Method.
+	}	
+	
+	public synchronized void stop() {
+		if (!running)
+			return;
+		running = false;
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	private void drawPieces() {
+		PieceS.whiteKing.draw();
+		PieceS.whiteQueen.draw();
+		PieceS.whiteBishop.draw();
+		PieceS.whiteBishop2.draw();
+		PieceS.whiteKnight.draw();
+		PieceS.whiteKnight2.draw();
+		PieceS.whiteRook.draw();
+		PieceS.whiteRook2.draw();
 		
+		PieceS.whitePawn.draw();
+		PieceS.whitePawn2.draw();
+		PieceS.whitePawn3.draw();
+		PieceS.whitePawn4.draw();
+		PieceS.whitePawn5.draw();
+		PieceS.whitePawn6.draw();
+		PieceS.whitePawn7.draw();
+		PieceS.whitePawn8.draw();
+		
+		
+		PieceS.blackKing.draw();
+		PieceS.blackQueen.draw();
+		PieceS.blackBishop.draw();
+		PieceS.blackBishop2.draw();
+		PieceS.blackKnight.draw();
+		PieceS.blackKnight2.draw();
+		PieceS.blackRook.draw();
+		PieceS.blackRook2.draw();
+		
+		PieceS.blackPawn.draw();
+		PieceS.blackPawn2.draw();
+		PieceS.blackPawn3.draw();
+		PieceS.blackPawn4.draw();
+		PieceS.blackPawn5.draw();
+		PieceS.blackPawn6.draw();
+		PieceS.blackPawn7.draw();
+		PieceS.blackPawn8.draw();
 	}
 	
 	private void drawBoard() {
@@ -124,44 +169,4 @@ public class Game implements Runnable { //Anfang von Klasse.
 			y = y + rectSize;
 		}
 	} // Ende von drawBoard
-	
-	private void init() {
-
-		display = new Display(title, width, height);
-		ImgS.loadAll(50, 50);
-	}	
-	
-	public Game(String title, int width, int height) {
-		this.width = width;
-		this.height = height;
-		this.title = title;
-	}
-	
-	public synchronized void start() {
-		if(running)
-			return;
-		running = true;
-		thread = new Thread(this);
-		thread.start(); 					// calls "run" Method.
-	}	
-	
-	public synchronized void stop() {
-		if (!running)
-			return;
-		running = false;
-		try {
-			thread.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void run() {
-		init();
-		while(running) {
-			tick();
-			render();
-		}
-		stop();
-	}
 } // Ende von Klasse.

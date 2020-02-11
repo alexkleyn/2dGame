@@ -1,5 +1,7 @@
-package dev.alex.game.gfx;
+package dev.alex.game.gfx.chessGfx;
 import java.awt.image.BufferedImage;
+
+import dev.alex.game.gfx.ImageLoader;
 import dev.alex.game.gfx.SpriteSheet;
 
 public class ImgS {		// Assets

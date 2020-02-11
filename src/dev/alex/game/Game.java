@@ -1,11 +1,11 @@
 package dev.alex.game;
 import java.awt.Color;
+
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import dev.alex.game.display.Display;
-import dev.alex.game.gfx.ChessPieces;
-import dev.alex.game.gfx.Position;
-import dev.alex.game.gfx.setPositions;
+import dev.alex.game.gfx.ImgS;
+import dev.alex.game.gfx.pS;
 
 public class Game implements Runnable { //Anfang von Klasse.
 	
@@ -16,7 +16,7 @@ public class Game implements Runnable { //Anfang von Klasse.
 	public String title;
 	
 	private Thread thread;
-	private ChessPieces chessPieces;
+	private ImgS img;
 	private Display display;
 	private BufferStrategy bs;
 	private Graphics g;
@@ -33,8 +33,9 @@ public class Game implements Runnable { //Anfang von Klasse.
 		g.clearRect(0, 0, width, height);
 		
 		//Drawing	
+		
 		drawBoard();
-		drawChessPieces();
+		drawPieces();
 		
 		
 		//End of Drawing
@@ -43,40 +44,43 @@ public class Game implements Runnable { //Anfang von Klasse.
 	}
 	
 	
-	private void drawChessPieces() {
+	private void drawPieces() {
 
-
+		g.drawImage(ImgS.ImgWhiteKing, pS.pWhiteKing.getX(), pS.pWhiteKing.getY(), null);
+		g.drawImage(ImgS.ImgWhiteQueen, pS.pWhiteQueen.getX(), pS.pWhiteQueen.getY(), null);
+		g.drawImage(ImgS.ImgWhiteBishop, pS.pWhiteBishop.getX(), pS.pWhiteBishop.getY(), null);
+		g.drawImage(ImgS.ImgWhiteBishop, pS.pWhiteBishop2.getX(), pS.pWhiteBishop2.getY(), null);
+		g.drawImage(ImgS.ImgWhiteKnight, pS.pWhiteKnight.getX(), pS.pWhiteKnight.getY(), null);
+		g.drawImage(ImgS.ImgWhiteKnight, pS.pWhiteKnight2.getX(), pS.pWhiteKnight2.getY(), null);
+		g.drawImage(ImgS.ImgWhiteRook, pS.pWhiteRook.getX(), pS.pWhiteRook.getY(), null);
+		g.drawImage(ImgS.ImgWhiteRook, pS.pWhiteRook2.getX(), pS.pWhiteRook2.getY(), null);
 		
-
-		g.drawImage(chessPieces.whiteKing, setPositions.pWhiteKing.getX(), setPositions.pWhiteKing.getY(), null);
-		g.drawImage(chessPieces.whiteQueen, setPositions.pWhiteQueen.getX(), setPositions.pWhiteQueen.getY(), null);
-		g.drawImage(chessPieces.whiteBishop, setPositions.pWhiteBishop.getX(), setPositions.pWhiteBishop.getY(), null);
-		g.drawImage(chessPieces.whiteBishop, setPositions.pWhiteBishop2.getX(), setPositions.pWhiteBishop2.getY(), null);
-		g.drawImage(chessPieces.whiteKnight, setPositions.pWhiteKnight.getX(), setPositions.pWhiteKnight.getY(), null);
-		g.drawImage(chessPieces.whiteKnight, setPositions.pWhiteKnight2.getX(), setPositions.pWhiteKnight2.getY(), null);
-		g.drawImage(chessPieces.whiteRook, setPositions.pWhiteRook.getX(), setPositions.pWhiteRook.getY(), null);
-		g.drawImage(chessPieces.whiteRook, setPositions.pWhiteRook2.getX(), setPositions.pWhiteRook2.getY(), null);
+		g.drawImage(ImgS.ImgWhitePawn, pS.pWhitePawn.getX(), pS.pWhitePawn.getY(), null);
+		g.drawImage(ImgS.ImgWhitePawn, pS.pWhitePawn2.getX(), pS.pWhitePawn2.getY(), null);
+		g.drawImage(ImgS.ImgWhitePawn, pS.pWhitePawn3.getX(), pS.pWhitePawn3.getY(), null);
+		g.drawImage(ImgS.ImgWhitePawn, pS.pWhitePawn4.getX(), pS.pWhitePawn4.getY(), null);
+		g.drawImage(ImgS.ImgWhitePawn, pS.pWhitePawn5.getX(), pS.pWhitePawn5.getY(), null);
+		g.drawImage(ImgS.ImgWhitePawn, pS.pWhitePawn6.getX(), pS.pWhitePawn6.getY(), null);
+		g.drawImage(ImgS.ImgWhitePawn, pS.pWhitePawn7.getX(), pS.pWhitePawn7.getY(), null);
+		g.drawImage(ImgS.ImgWhitePawn, pS.pWhitePawn8.getX(), pS.pWhitePawn8.getY(), null);
 		
-		int x = 0;
-		for (int i = 0; i < 8; i++) {
-			g.drawImage(chessPieces.whitePawn, x, 300, null);
-			x = x + 50;
-		}
+		g.drawImage(ImgS.ImgBlackKing, pS.pBlackKing.getX(), pS.pBlackKing.getY(), null);
+		g.drawImage(ImgS.ImgBlackQueen, pS.pBlackQueen.getX(), pS.pBlackQueen.getY(), null);
+		g.drawImage(ImgS.ImgBlackBishop, pS.pBlackBishop.getX(), pS.pBlackBishop.getY(), null);
+		g.drawImage(ImgS.ImgBlackBishop, pS.pBlackBishop2.getX(), pS.pBlackBishop2.getY(), null);
+		g.drawImage(ImgS.ImgBlackKnight, pS.pBlackKnight.getX(), pS.pBlackKnight.getY(), null);
+		g.drawImage(ImgS.ImgBlackKnight, pS.pBlackKnight2.getX(), pS.pBlackKnight2.getY(), null);
+		g.drawImage(ImgS.ImgBlackRook, pS.pBlackRook.getX(), pS.pBlackRook.getY(), null);
+		g.drawImage(ImgS.ImgBlackRook, pS.pBlackRook2.getX(), pS.pBlackRook2.getY(), null);
 		
-		g.drawImage(chessPieces.blackKing, setPositions.pBlackKing.getX(), setPositions.pBlackKing.getY(), null);
-		g.drawImage(chessPieces.blackQueen, setPositions.pBlackQueen.getX(), setPositions.pBlackQueen.getY(), null);
-		g.drawImage(chessPieces.blackBishop, setPositions.pBlackBishop.getX(), setPositions.pBlackBishop.getY(), null);
-		g.drawImage(chessPieces.blackBishop, setPositions.pBlackBishop2.getX(), setPositions.pBlackBishop2.getY(), null);
-		g.drawImage(chessPieces.blackKnight, setPositions.pBlackKnight.getX(), setPositions.pBlackKnight.getY(), null);
-		g.drawImage(chessPieces.blackKnight, setPositions.pBlackKnight2.getX(), setPositions.pBlackKnight2.getY(), null);
-		g.drawImage(chessPieces.blackRook, setPositions.pBlackRook.getX(), setPositions.pBlackRook.getY(), null);
-		g.drawImage(chessPieces.blackRook, setPositions.pBlackRook2.getX(), setPositions.pBlackRook2.getY(), null);
-		
-		x = 0;
-		for (int i = 0; i < 8; i++) {
-			g.drawImage(chessPieces.blackPawn, x, 50, null);
-			x = x + 50;
-		}
+		g.drawImage(ImgS.ImgBlackPawn, pS.pBlackPawn.getX(), pS.pBlackPawn.getY(), null);
+		g.drawImage(ImgS.ImgBlackPawn, pS.pBlackPawn2.getX(), pS.pBlackPawn2.getY(), null);
+		g.drawImage(ImgS.ImgBlackPawn, pS.pBlackPawn3.getX(), pS.pBlackPawn3.getY(), null);
+		g.drawImage(ImgS.ImgBlackPawn, pS.pBlackPawn4.getX(), pS.pBlackPawn4.getY(), null);
+		g.drawImage(ImgS.ImgBlackPawn, pS.pBlackPawn5.getX(), pS.pBlackPawn5.getY(), null);
+		g.drawImage(ImgS.ImgBlackPawn, pS.pBlackPawn6.getX(), pS.pBlackPawn6.getY(), null);
+		g.drawImage(ImgS.ImgBlackPawn, pS.pBlackPawn7.getX(), pS.pBlackPawn7.getY(), null);
+		g.drawImage(ImgS.ImgBlackPawn, pS.pBlackPawn8.getX(), pS.pBlackPawn8.getY(), null);
 	}
 	
 	private void tick() {
@@ -124,8 +128,7 @@ public class Game implements Runnable { //Anfang von Klasse.
 	private void init() {
 
 		display = new Display(title, width, height);
-		chessPieces = new ChessPieces();
-		chessPieces.loadAll(50, 50);
+		ImgS.loadAll(50, 50);
 	}	
 	
 	public Game(String title, int width, int height) {

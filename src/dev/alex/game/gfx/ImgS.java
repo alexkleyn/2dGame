@@ -2,41 +2,41 @@ package dev.alex.game.gfx;
 import java.awt.image.BufferedImage;
 import dev.alex.game.gfx.SpriteSheet;
 
-public class ChessPieces {		// Assets
+public class ImgS {		// Assets
 	
-	public BufferedImage whiteKing;
-	public  BufferedImage whiteQueen;
-	public  BufferedImage whiteBishop;
-	public  BufferedImage whiteKnight;
-	public  BufferedImage whiteRook;
-	public  BufferedImage whitePawn;
+	public static BufferedImage ImgWhiteKing;
+	public static BufferedImage ImgWhiteQueen;
+	public static BufferedImage ImgWhiteBishop;
+	public static BufferedImage ImgWhiteKnight;
+	public static BufferedImage ImgWhiteRook;
+	public static BufferedImage ImgWhitePawn;
 	
-	public  BufferedImage blackKing;
-	public  BufferedImage blackQueen;
-	public  BufferedImage blackBishop;
-	public  BufferedImage blackKnight;
-	public  BufferedImage blackRook;
-	public  BufferedImage blackPawn;
+	public static BufferedImage ImgBlackKing;
+	public static BufferedImage ImgBlackQueen;
+	public static BufferedImage ImgBlackBishop;
+	public static BufferedImage ImgBlackKnight;
+	public static BufferedImage ImgBlackRook;
+	public static BufferedImage ImgBlackPawn;
 	
 	
 		
-	private BufferedImage loadChessPiece(int x, int y, int width, int height) {
+	private static BufferedImage loadChessPieceSheet(int x, int y, int width, int height) {
 		return new SpriteSheet(ImageLoader.loadImage("/textures/chess.png")).crop(x, y, width, height);
 	}
 
-	public void loadAll (int width, int height) {
-		whiteKing = loadChessPiece (0, 0, width, height);
-		whiteQueen = loadChessPiece (1*width, 0, width, height);
-		whiteBishop = loadChessPiece (2*width, 0, width, height);
-		whiteKnight = loadChessPiece (3*width, 0, width, height);
-		whiteRook = loadChessPiece (4*width, 0, width, height);
-		whitePawn = loadChessPiece (5*width, 0, width, height);
+	public static void loadAll (int width, int height) {
+		ImgWhiteKing = loadChessPieceSheet (0, 0, width, height);
+		ImgWhiteQueen = loadChessPieceSheet (1*width, 0, width, height);
+		ImgWhiteBishop = loadChessPieceSheet (2*width, 0, width, height);
+		ImgWhiteKnight = loadChessPieceSheet (3*width, 0, width, height);
+		ImgWhiteRook = loadChessPieceSheet (4*width, 0, width, height);
+		ImgWhitePawn = loadChessPieceSheet (5*width, 0, width, height);
 		
-		blackKing = loadChessPiece (0, 1*height, width, height);
-		blackQueen = loadChessPiece (1*width, 1*height, width, height);
-		blackBishop = loadChessPiece (2*width, 1*height, width, height);
-		blackKnight = loadChessPiece (3*width, 1*height, width, height);
-		blackRook = loadChessPiece (4*width, 1*height, width, height);
-		blackPawn = loadChessPiece (5*width, 1*height, width, height);
+		ImgBlackKing = loadChessPieceSheet (0, 1*height, width, height);
+		ImgBlackQueen = loadChessPieceSheet (1*width, 1*height, width, height);
+		ImgBlackBishop = loadChessPieceSheet (2*width, 1*height, width, height);
+		ImgBlackKnight = loadChessPieceSheet (3*width, 1*height, width, height);
+		ImgBlackRook = loadChessPieceSheet (4*width, 1*height, width, height);
+		ImgBlackPawn = loadChessPieceSheet (5*width, 1*height, width, height);
 	}
 }

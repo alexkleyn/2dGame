@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import dev.alex.game.display.Display;
 import dev.alex.game.gfx.ChessPieces;
+import dev.alex.game.gfx.Position;
+import dev.alex.game.gfx.setPositions;
 
 public class Game implements Runnable { //Anfang von Klasse.
 	
@@ -18,8 +20,8 @@ public class Game implements Runnable { //Anfang von Klasse.
 	private Display display;
 	private BufferStrategy bs;
 	private Graphics g;
-
 	
+
 	
 	private void render() {
 		bs = display.getCanvas().getBufferStrategy();
@@ -41,16 +43,19 @@ public class Game implements Runnable { //Anfang von Klasse.
 	}
 	
 	
-	
 	private void drawChessPieces() {
-		g.drawImage(chessPieces.whiteKing, 150, 350, null);
-		g.drawImage(chessPieces.whiteQueen, 200, 350, null);
-		g.drawImage(chessPieces.whiteBishop, 100, 350, null);
-		g.drawImage(chessPieces.whiteBishop, 250, 350, null);
-		g.drawImage(chessPieces.whiteKnight, 50, 350, null);
-		g.drawImage(chessPieces.whiteKnight, 300, 350, null);
-		g.drawImage(chessPieces.whiteRook, 0, 350, null);
-		g.drawImage(chessPieces.whiteRook, 350, 350, null);
+
+
+		
+
+		g.drawImage(chessPieces.whiteKing, setPositions.pWhiteKing.getX(), setPositions.pWhiteKing.getY(), null);
+		g.drawImage(chessPieces.whiteQueen, setPositions.pWhiteQueen.getX(), setPositions.pWhiteQueen.getY(), null);
+		g.drawImage(chessPieces.whiteBishop, setPositions.pWhiteBishop.getX(), setPositions.pWhiteBishop.getY(), null);
+		g.drawImage(chessPieces.whiteBishop, setPositions.pWhiteBishop2.getX(), setPositions.pWhiteBishop2.getY(), null);
+		g.drawImage(chessPieces.whiteKnight, setPositions.pWhiteKnight.getX(), setPositions.pWhiteKnight.getY(), null);
+		g.drawImage(chessPieces.whiteKnight, setPositions.pWhiteKnight2.getX(), setPositions.pWhiteKnight2.getY(), null);
+		g.drawImage(chessPieces.whiteRook, setPositions.pWhiteRook.getX(), setPositions.pWhiteRook.getY(), null);
+		g.drawImage(chessPieces.whiteRook, setPositions.pWhiteRook2.getX(), setPositions.pWhiteRook2.getY(), null);
 		
 		int x = 0;
 		for (int i = 0; i < 8; i++) {
@@ -58,14 +63,14 @@ public class Game implements Runnable { //Anfang von Klasse.
 			x = x + 50;
 		}
 		
-		g.drawImage(chessPieces.blackKing, 150, 0, null);
-		g.drawImage(chessPieces.blackQueen, 200, 0, null);
-		g.drawImage(chessPieces.blackBishop, 100, 0, null);
-		g.drawImage(chessPieces.blackBishop, 250, 0, null);
-		g.drawImage(chessPieces.blackKnight, 50, 0, null);
-		g.drawImage(chessPieces.blackKnight, 300, 0, null);
-		g.drawImage(chessPieces.blackRook, 0, 0, null);
-		g.drawImage(chessPieces.blackRook, 350, 0, null);
+		g.drawImage(chessPieces.blackKing, setPositions.pBlackKing.getX(), setPositions.pBlackKing.getY(), null);
+		g.drawImage(chessPieces.blackQueen, setPositions.pBlackQueen.getX(), setPositions.pBlackQueen.getY(), null);
+		g.drawImage(chessPieces.blackBishop, setPositions.pBlackBishop.getX(), setPositions.pBlackBishop.getY(), null);
+		g.drawImage(chessPieces.blackBishop, setPositions.pBlackBishop2.getX(), setPositions.pBlackBishop2.getY(), null);
+		g.drawImage(chessPieces.blackKnight, setPositions.pBlackKnight.getX(), setPositions.pBlackKnight.getY(), null);
+		g.drawImage(chessPieces.blackKnight, setPositions.pBlackKnight2.getX(), setPositions.pBlackKnight2.getY(), null);
+		g.drawImage(chessPieces.blackRook, setPositions.pBlackRook.getX(), setPositions.pBlackRook.getY(), null);
+		g.drawImage(chessPieces.blackRook, setPositions.pBlackRook2.getX(), setPositions.pBlackRook2.getY(), null);
 		
 		x = 0;
 		for (int i = 0; i < 8; i++) {
@@ -73,9 +78,12 @@ public class Game implements Runnable { //Anfang von Klasse.
 			x = x + 50;
 		}
 	}
+	
 	private void tick() {
+
 		
 	}
+	
 	private void drawBoard() {
 		Color black = new Color(50, 50, 50);
 		Color blue = new Color(200, 200, 200);
@@ -112,16 +120,20 @@ public class Game implements Runnable { //Anfang von Klasse.
 			y = y + rectSize;
 		}
 	} // Ende von drawBoard
+	
 	private void init() {
+
 		display = new Display(title, width, height);
 		chessPieces = new ChessPieces();
-		chessPieces.loadAll();
+		chessPieces.loadAll(50, 50);
 	}	
+	
 	public Game(String title, int width, int height) {
 		this.width = width;
 		this.height = height;
 		this.title = title;
 	}
+	
 	public synchronized void start() {
 		if(running)
 			return;
@@ -129,6 +141,7 @@ public class Game implements Runnable { //Anfang von Klasse.
 		thread = new Thread(this);
 		thread.start(); 					// calls "run" Method.
 	}	
+	
 	public synchronized void stop() {
 		if (!running)
 			return;
@@ -139,6 +152,7 @@ public class Game implements Runnable { //Anfang von Klasse.
 			e.printStackTrace();
 		}
 	}
+	
 	public void run() {
 		init();
 		while(running) {

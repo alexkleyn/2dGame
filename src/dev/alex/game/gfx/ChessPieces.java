@@ -2,7 +2,7 @@ package dev.alex.game.gfx;
 import java.awt.image.BufferedImage;
 import dev.alex.game.gfx.SpriteSheet;
 
-public class ChessPieces {
+public class ChessPieces {		// Assets
 	
 	public BufferedImage whiteKing;
 	public  BufferedImage whiteQueen;
@@ -24,19 +24,19 @@ public class ChessPieces {
 		return new SpriteSheet(ImageLoader.loadImage("/textures/chess.png")).crop(x, y, width, height);
 	}
 
-	public void loadAll() {
-		whiteKing = loadChessPiece (0, 0, 50, 50);
-		whiteQueen = loadChessPiece (50, 0, 50, 50);
-		whiteBishop = loadChessPiece (100, 0, 50, 50);
-		whiteKnight = loadChessPiece (150, 0, 50, 50);
-		whiteRook = loadChessPiece (200, 0, 50, 50);
-		whitePawn = loadChessPiece (250, 0, 50, 50);
+	public void loadAll (int width, int height) {
+		whiteKing = loadChessPiece (0, 0, width, height);
+		whiteQueen = loadChessPiece (1*width, 0, width, height);
+		whiteBishop = loadChessPiece (2*width, 0, width, height);
+		whiteKnight = loadChessPiece (3*width, 0, width, height);
+		whiteRook = loadChessPiece (4*width, 0, width, height);
+		whitePawn = loadChessPiece (5*width, 0, width, height);
 		
-		blackKing = loadChessPiece (0, 50, 50, 50);
-		blackQueen = loadChessPiece (50, 50, 50, 50);
-		blackBishop = loadChessPiece (100, 50, 50, 50);
-		blackKnight = loadChessPiece (150, 50, 50, 50);
-		blackRook = loadChessPiece (200, 50, 50, 50);
-		blackPawn = loadChessPiece (250, 50, 50, 50);
+		blackKing = loadChessPiece (0, 1*height, width, height);
+		blackQueen = loadChessPiece (1*width, 1*height, width, height);
+		blackBishop = loadChessPiece (2*width, 1*height, width, height);
+		blackKnight = loadChessPiece (3*width, 1*height, width, height);
+		blackRook = loadChessPiece (4*width, 1*height, width, height);
+		blackPawn = loadChessPiece (5*width, 1*height, width, height);
 	}
 }

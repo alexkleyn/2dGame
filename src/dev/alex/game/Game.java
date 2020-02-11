@@ -1,9 +1,11 @@
 package dev.alex.game;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import dev.alex.game.display.Display;
 import dev.alex.game.gfx.chessGfx.ImgS;
+import dev.alex.game.states.GameState;
+import dev.alex.game.states.State;
+import dev.alex.game.states.StateManager;
 
 public class Game implements Runnable { //Anfang von Klasse.
 	
@@ -19,12 +21,13 @@ public class Game implements Runnable { //Anfang von Klasse.
 	private BufferStrategy bs;
 	public static Graphics g;
 	
-
+	private State gameState;
+	private State settings;
+	private State Menu;
 	
 	
 	
 	private void render() {
-
 		bs = display.getCanvas().getBufferStrategy();
 		if(bs == null) {
 			display.getCanvas().createBufferStrategy(3);
@@ -32,12 +35,10 @@ public class Game implements Runnable { //Anfang von Klasse.
 		}
 		g = bs.getDrawGraphics();
 		g.clearRect(0, 0, width, height);
-		
 		//Drawing	
 		
-		drawBoard();
-		drawPieces();
-		
+		if(StateManager.getState() != null)
+			StateManager.getState().render(g);
 		
 		//End of Drawing
 		bs.show();
@@ -45,17 +46,40 @@ public class Game implements Runnable { //Anfang von Klasse.
 	}
 	
 	private void tick() {
-		if (PieceS.blackPawn.p.getY() < 150)
-			PieceS.blackPawn.p.setY(PieceS.blackPawn.p.getY() + 1);
+		if (StateManager.getState() != null)
+			StateManager.getState().tick();
 	}
 	
-	
-	
 	private void init() {
-
-
 		display = new Display(title, width, height);
 		ImgS.loadAll(50, 50);
+		
+		gameState = new GameState(width, height);
+		StateManager.setState(gameState);
+	}
+	
+	public void run() {
+		init();
+		
+		int fps = 60;			//makes Game run at same Speed on every Device.
+		double timePerTick = 1000000000 / fps;
+		double delta = 0;
+		long now;
+		long lastTime = System.nanoTime();
+		
+		while(running) {	
+			now = System.nanoTime();
+			delta += (now - lastTime) / timePerTick;
+			lastTime = now;
+			
+			if(delta >= 1) {
+				tick();
+				render();
+				delta--;
+			}
+		}
+		
+		stop();
 	}
 	
 	public Game(String title, int width, int height) {
@@ -63,17 +87,7 @@ public class Game implements Runnable { //Anfang von Klasse.
 		this.height = height;
 		this.title = title;
 	}
-	
-	public void run() {
-		init();
-		while(running) {
-			tick();
-			render();
-		}
-		stop();
-	}
-	
-	
+
 	public synchronized void start() {
 		if(running)
 			return;
@@ -93,80 +107,4 @@ public class Game implements Runnable { //Anfang von Klasse.
 		}
 	}
 	
-	
-	private void drawPieces() {
-		PieceS.whiteKing.draw();
-		PieceS.whiteQueen.draw();
-		PieceS.whiteBishop.draw();
-		PieceS.whiteBishop2.draw();
-		PieceS.whiteKnight.draw();
-		PieceS.whiteKnight2.draw();
-		PieceS.whiteRook.draw();
-		PieceS.whiteRook2.draw();
-		
-		PieceS.whitePawn.draw();
-		PieceS.whitePawn2.draw();
-		PieceS.whitePawn3.draw();
-		PieceS.whitePawn4.draw();
-		PieceS.whitePawn5.draw();
-		PieceS.whitePawn6.draw();
-		PieceS.whitePawn7.draw();
-		PieceS.whitePawn8.draw();
-		
-		
-		PieceS.blackKing.draw();
-		PieceS.blackQueen.draw();
-		PieceS.blackBishop.draw();
-		PieceS.blackBishop2.draw();
-		PieceS.blackKnight.draw();
-		PieceS.blackKnight2.draw();
-		PieceS.blackRook.draw();
-		PieceS.blackRook2.draw();
-		
-		PieceS.blackPawn.draw();
-		PieceS.blackPawn2.draw();
-		PieceS.blackPawn3.draw();
-		PieceS.blackPawn4.draw();
-		PieceS.blackPawn5.draw();
-		PieceS.blackPawn6.draw();
-		PieceS.blackPawn7.draw();
-		PieceS.blackPawn8.draw();
-	}
-	
-	private void drawBoard() {
-		Color black = new Color(50, 50, 50);
-		Color blue = new Color(200, 200, 200);
-		String lastColor = "black";
-		
-		int rectSize = 50;
-		int x = 0;
-		int y = 0;
-		
-		
-		while (y < height) {
-			if(((x/rectSize)%2) == 0) {				// Checks whether x is even.
-				if (lastColor == "black") {
-					g.setColor(blue);
-					lastColor = "blue";
-				} else {
-					g.setColor(black);
-					lastColor = "black";
-				}
-			}
-			x = 0;
-			while (x < width) {
-				if (lastColor == "black") {
-					g.setColor(blue);
-					lastColor = "blue";
-				} else {
-					g.setColor(black);
-					lastColor = "black";
-				}
-	
-				g.fillRect(x, y, rectSize, rectSize);
-				x = x + rectSize;
-			}
-			y = y + rectSize;
-		}
-	} // Ende von drawBoard
 } // Ende von Klasse.

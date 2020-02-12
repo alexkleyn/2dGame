@@ -1,75 +1,89 @@
 package dev.alex.game.states;
 import java.awt.Color;
-import java.awt.Graphics;
+import dev.alex.game.Game;
+import dev.alex.game.Piece;
 
+import java.awt.Graphics;
 import dev.alex.game.PieceS;
 
 public class GameState extends State {
 	
 	public int width;
 	public int height;
-	
 	public Graphics g;
-	
-	
-	public GameState(int width, int height) {
-		this.width = width;
-		this.height = height;
-	}
+	private Piece currentActor = PieceS.whiteKing;
 	
 	public void tick() {
-		if (PieceS.whitePawn4.p.getY() > 200)
-			PieceS.whitePawn4.p.setY(PieceS.whitePawn4.p.getY() - 2);
+		changeActor();
+		currentActor.tick();
+		
 	}
 
+	public void changeActor() {
+		if (Game.km.q)
+			currentActor = PieceS.whiteQueen;
+		if (Game.km.k)
+			currentActor = PieceS.whiteKing;
+	}
+	
+	
 	public void render(Graphics g) {
 		this.g = g;
 		drawBoard();
 		drawPieces();
 	}
-	
-	
-	private void drawPieces() {
-		PieceS.whiteKing.draw();
-		PieceS.whiteQueen.draw();
-		PieceS.whiteBishop.draw();
-		PieceS.whiteBishop2.draw();
-		PieceS.whiteKnight.draw();
-		PieceS.whiteKnight2.draw();
-		PieceS.whiteRook.draw();
-		PieceS.whiteRook2.draw();
-		
-		PieceS.whitePawn.draw();
-		PieceS.whitePawn2.draw();
-		PieceS.whitePawn3.draw();
-		PieceS.whitePawn4.draw();
-		PieceS.whitePawn5.draw();
-		PieceS.whitePawn6.draw();
-		PieceS.whitePawn7.draw();
-		PieceS.whitePawn8.draw();
-		
-		
-		PieceS.blackKing.draw();
-		PieceS.blackQueen.draw();
-		PieceS.blackBishop.draw();
-		PieceS.blackBishop2.draw();
-		PieceS.blackKnight.draw();
-		PieceS.blackKnight2.draw();
-		PieceS.blackRook.draw();
-		PieceS.blackRook2.draw();
-		
-		PieceS.blackPawn.draw();
-		PieceS.blackPawn2.draw();
-		PieceS.blackPawn3.draw();
-		PieceS.blackPawn4.draw();
-		PieceS.blackPawn5.draw();
-		PieceS.blackPawn6.draw();
-		PieceS.blackPawn7.draw();
-		PieceS.blackPawn8.draw();
+	public void setCurrentActor(Piece newCurrentActor) {
+		currentActor =  newCurrentActor;
 	}
-	
-	private void drawBoard() {
+	public Piece getCurrentActor() {
+		return currentActor;
+	}
+	public GameState (int width, int height, Game game) {
+		super(game);
+		this.width = width;
+		this.height = height;
+	}
+	private void drawPieces() {
 
+
+		PieceS.whiteKing.render();
+		PieceS.whiteQueen.render();
+		PieceS.whiteBishop.render();
+		PieceS.whiteBishop2.render();
+		PieceS.whiteKnight.render();
+		PieceS.whiteKnight2.render();
+		PieceS.whiteRook.render();
+		PieceS.whiteRook2.render();
+		
+		PieceS.whitePawn.render();
+		PieceS.whitePawn2.render();
+		PieceS.whitePawn3.render();
+		PieceS.whitePawn4.render();
+		PieceS.whitePawn5.render();
+		PieceS.whitePawn6.render();
+		PieceS.whitePawn7.render();
+		PieceS.whitePawn8.render();
+		
+		
+		PieceS.blackKing.render();
+		PieceS.blackQueen.render();
+		PieceS.blackBishop.render();
+		PieceS.blackBishop2.render();
+		PieceS.blackKnight.render();
+		PieceS.blackKnight2.render();
+		PieceS.blackRook.render();
+		PieceS.blackRook2.render();
+		
+		PieceS.blackPawn.render();
+		PieceS.blackPawn2.render();
+		PieceS.blackPawn3.render();
+		PieceS.blackPawn4.render();
+		PieceS.blackPawn5.render();
+		PieceS.blackPawn6.render();
+		PieceS.blackPawn7.render();
+		PieceS.blackPawn8.render();
+	}
+	private void drawBoard() {
 		Color black = new Color(50, 50, 50);
 		Color blue = new Color(200, 200, 200);
 		String lastColor = "black";
@@ -105,6 +119,4 @@ public class GameState extends State {
 			y = y + rectSize;
 		}
 	} // Ende von drawBoard
-	
-	
 }

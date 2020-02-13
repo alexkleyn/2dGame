@@ -1,5 +1,6 @@
 package dev.alex.game;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import dev.alex.game.gfx.chessGfx.ImgS;
@@ -10,6 +11,7 @@ public class Piece {
 	
 	public Graphics g;
 	
+	private final int id;
 	private BufferedImage imgBackup;
 	private BufferedImage img;
 	public Position p;
@@ -17,13 +19,19 @@ public class Piece {
 	private int backupY;
 	long wait = System.nanoTime();
 	long waitValue = System.nanoTime();
+	public Rectangle bounds;
 	
-	public Piece (BufferedImage img, Position p) {
+	public static Piece[] pieces = new Piece[32];
+	
+	public Piece (BufferedImage img, Position p, int id) {
 		this.p = p;
 		backupX = p.getX();
 		backupY = p.getY();
 		this.img = img;
 		imgBackup = img;
+		this.id = id;
+		pieces[id] = this;
+		bounds = new Rectangle(p.getX(), p.getY(), 50, 50);
 	}
 	
 	public void tick() {
@@ -36,6 +44,7 @@ public class Piece {
 	}
 	
 	public void render() {
+		bounds.setLocation(p.getX(), p.getY());
 		Game.g.drawImage(img, p.getX(), p.getY(), null);
 	}
 	
@@ -48,8 +57,9 @@ public class Piece {
 	}
 	
 	public void delete() {
-		if (Game.km.del)
-			img = null;	
+		if (Game.km.del) {
+			img = null;
+		}
 	}
 	
 	
@@ -89,4 +99,7 @@ public class Piece {
 				wait = System.nanoTime();
 	}}}
 	
+	public int getId() {
+		return id;
+	}
 } //End of class

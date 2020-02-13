@@ -4,6 +4,7 @@ import java.awt.image.BufferStrategy;
 import dev.alex.game.display.Display;
 import dev.alex.game.gfx.chessGfx.ImgS;
 import dev.alex.game.input.KeyManager;
+import dev.alex.game.input.MouseManager;
 import dev.alex.game.states.GameState;
 import dev.alex.game.states.MenuState;
 import dev.alex.game.states.State;
@@ -24,9 +25,10 @@ public class Game implements Runnable { //Anfang von Klasse.
 	public static Graphics g;
 	
 	public static KeyManager km = new KeyManager();
+	public static MouseManager mm = new MouseManager();
 	
-	private State gameState;
-	private State menuState;
+	public static State gameState;
+	public State menuState;
 	
 	
 	
@@ -57,6 +59,10 @@ public class Game implements Runnable { //Anfang von Klasse.
 	private void init() {
 		display = new Display(title, width, height);
 		display.getJFrame().addKeyListener(km);
+		display.getJFrame().addMouseListener(mm);
+		display.getJFrame().addMouseMotionListener(mm);
+		display.getCanvas().addMouseListener(mm);
+		display.getCanvas().addMouseMotionListener(mm);
 		ImgS.loadAll(50, 50);
 		
 		gameState = new GameState(width, height, this);

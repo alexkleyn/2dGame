@@ -4,7 +4,10 @@ import dev.alex.game.Game;
 import dev.alex.game.Piece;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
+
 import dev.alex.game.PieceS;
+import dev.alex.game.tile.Tile;
 
 public class GameState extends State {
 	
@@ -14,17 +17,46 @@ public class GameState extends State {
 	private Piece currentActor = PieceS.whiteKing;
 	
 	public void tick() {
-		changeActor();
+		pieceDrag();
+		changeActor("white");
 		currentActor.tick();
 		
 	}
 
-	public void changeActor() {
-		if (Game.km.q)
-			currentActor = PieceS.whiteQueen;
-		if (Game.km.k)
-			currentActor = PieceS.whiteKing;
+	public void pieceDrag() {
+		if (Game.mm.getLeftPressed()) {
+			for (Piece piece : Piece.pieces) {
+				if(piece.bounds.contains(Game.mm.getMouseX(), Game.mm.getMouseY())) {
+					currentActor = piece;
+					while(!Game.mm.getRightPressed()) {
+						piece.p.setX(Game.mm.getMouseX());
+						piece.p.setY(Game.mm.getMouseY());
+						System.out.println("waiting");
+					}
+					piece.render();
+				}
+			}
+		}
 	}
+	
+	public void changeActor(String color) {
+		if (color == "white" || color == "White") {
+			if (Game.km.q)
+				currentActor = PieceS.whiteQueen;
+			if (Game.km.k)
+				currentActor = PieceS.whiteKing;
+		}
+		
+		else if (color == "black" || color == "Black") {
+			if (Game.km.q)
+				currentActor = PieceS.blackQueen;
+			if (Game.km.k)
+				currentActor = PieceS.blackKing;
+		} else {
+			System.out.println("Wrong value given for 'changeActor'.");
+		}
+	}
+	
 	
 	
 	public void render(Graphics g) {
@@ -83,40 +115,33 @@ public class GameState extends State {
 		PieceS.blackPawn7.render();
 		PieceS.blackPawn8.render();
 	}
-	private void drawBoard() {
-		Color black = new Color(50, 50, 50);
-		Color blue = new Color(200, 200, 200);
-		String lastColor = "black";
-		
-		int rectSize = 50;
+	public void drawBoard() {
+		boolean lastColorBlack = true;
 		int x = 0;
 		int y = 0;
 		
-		
 		while (y < height) {
-			if(((x/rectSize)%2) == 0) {				// Checks whether x is even.
-				if (lastColor == "black") {
-					g.setColor(blue);
-					lastColor = "blue";
+			if(((x/Tile.rectSize)%2) == 0) {				// Checks whether x is even.
+				if (lastColorBlack) {
+					lastColorBlack = false;
 				} else {
-					g.setColor(black);
-					lastColor = "black";
+					lastColorBlack = true;
 				}
 			}
 			x = 0;
 			while (x < width) {
-				if (lastColor == "black") {
-					g.setColor(blue);
-					lastColor = "blue";
+				if (!lastColorBlack) {
+					Tile.tiles[0].render(g, x, y);
+					Tile.tiles[0].bounds = new Rectangle(x, y, 50, 50);
+					lastColorBlack = true;
 				} else {
-					g.setColor(black);
-					lastColor = "black";
+					Tile.tiles[1].render(g, x, y);
+					Tile.tiles[1].bounds = new Rectangle(x, y, 50, 50);
+					lastColorBlack = false;
 				}
-	
-				g.fillRect(x, y, rectSize, rectSize);
-				x = x + rectSize;
+				x += Tile.rectSize;
 			}
-			y = y + rectSize;
+			y +=Tile.rectSize;
 		}
-	} // Ende von drawBoard
-}
+	}
+} // Ende von Klasse

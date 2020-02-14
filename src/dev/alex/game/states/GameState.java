@@ -1,20 +1,23 @@
 package dev.alex.game.states;
-import java.awt.Color;
 import dev.alex.game.Game;
-import dev.alex.game.Piece;
 
+import dev.alex.game.Launcher;
+import dev.alex.game.gfx.chessGfx.ImgS;
+import dev.alex.game.gfx.chessGfx.pS;
+import dev.alex.game.pieces.Piece;
 import java.awt.Graphics;
-import java.awt.Rectangle;
-
-import dev.alex.game.PieceS;
+import dev.alex.game.pieces.PieceS;
 import dev.alex.game.tile.Tile;
 
 public class GameState extends State {
 	
+	public boolean lastWasBlack = true;
 	public int width;
 	public int height;
 	public Graphics g;
 	private Piece currentActor = PieceS.whiteKing;
+	public boolean makeDots = false;
+	Piece piece = new Piece(ImgS.ImgBlackBishop, pS.pBlackBishop, 32);
 	
 	public void tick() {
 		pieceDrag();
@@ -27,12 +30,37 @@ public class GameState extends State {
 		if (Game.mm.getLeftPressed()) {
 			for (Piece piece : Piece.pieces) {
 				if(piece.bounds.contains(Game.mm.getMouseX(), Game.mm.getMouseY())) {
+					Integer newPosX = null;
+					Integer newPosY = null;
+					makeDots = true;
+					this.piece = piece;
 					currentActor = piece;
 					while(!Game.mm.getRightPressed()) {
-						piece.p.setX(Game.mm.getMouseX());
-						piece.p.setY(Game.mm.getMouseY());
+						Launcher.game1.render();
+						int bumpX = (Game.mm.getMouseX()%50);
+						newPosX = (Game.mm.getMouseX() - bumpX);
+						int bumpY = (Game.mm.getMouseY()%50);
+						newPosY = (Game.mm.getMouseY() - bumpY);
 						System.out.println("waiting");
 					}
+					if(newPosX != null && newPosY != null) {
+						for (Tile t : Tile.tiles) {
+							if(newPosX == t.x && newPosY == t.y && t.enterable) {
+								piece.p.setX(newPosX);
+								piece.p.setY(newPosY);
+								for (Piece p : Piece.pieces) {
+									if (piece.p.getX() == p.p.getX() && piece.p.getY() == p.p.getY() && piece.getId() != p.getId() && piece.isBlack != p.isBlack)
+										p.delete();
+								}
+								t.enterable = false;
+							}
+						}
+					}
+					for (Tile t : Tile.tiles) {
+						if(t.enterable)
+							t.enterable = false;
+					}
+					makeDots = false;
 					piece.render();
 				}
 			}
@@ -57,12 +85,12 @@ public class GameState extends State {
 		}
 	}
 	
-	
-	
 	public void render(Graphics g) {
 		this.g = g;
 		drawBoard();
 		drawPieces();
+		if(makeDots)
+			piece.makeDots();
 	}
 	public void setCurrentActor(Piece newCurrentActor) {
 		currentActor =  newCurrentActor;
@@ -116,32 +144,7 @@ public class GameState extends State {
 		PieceS.blackPawn8.render();
 	}
 	public void drawBoard() {
-		boolean lastColorBlack = true;
-		int x = 0;
-		int y = 0;
-		
-		while (y < height) {
-			if(((x/Tile.rectSize)%2) == 0) {				// Checks whether x is even.
-				if (lastColorBlack) {
-					lastColorBlack = false;
-				} else {
-					lastColorBlack = true;
-				}
-			}
-			x = 0;
-			while (x < width) {
-				if (!lastColorBlack) {
-					Tile.tiles[0].render(g, x, y);
-					Tile.tiles[0].bounds = new Rectangle(x, y, 50, 50);
-					lastColorBlack = true;
-				} else {
-					Tile.tiles[1].render(g, x, y);
-					Tile.tiles[1].bounds = new Rectangle(x, y, 50, 50);
-					lastColorBlack = false;
-				}
-				x += Tile.rectSize;
-			}
-			y +=Tile.rectSize;
-		}
+		for(Tile t : Tile.tiles)
+		t.render(g);
 	}
 } // Ende von Klasse

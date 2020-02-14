@@ -1,16 +1,21 @@
-package dev.alex.game;
+package dev.alex.game.pieces;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
+import dev.alex.game.Game;
 import dev.alex.game.gfx.chessGfx.ImgS;
 import dev.alex.game.gfx.chessGfx.Position;
 import dev.alex.game.states.GameState;
+import dev.alex.game.tile.Tile;
 
 public class Piece {
 	
+	public boolean sameTeam = false;
+	public boolean isBlack;
 	public Graphics g;
-	
+	public int width = 400;
+	public int height = 400;
 	private final int id;
 	private BufferedImage imgBackup;
 	private BufferedImage img;
@@ -21,7 +26,7 @@ public class Piece {
 	long waitValue = System.nanoTime();
 	public Rectangle bounds;
 	
-	public static Piece[] pieces = new Piece[32];
+	public static Piece[] pieces = new Piece[33];
 	
 	public Piece (BufferedImage img, Position p, int id) {
 		this.p = p;
@@ -34,12 +39,33 @@ public class Piece {
 		bounds = new Rectangle(p.getX(), p.getY(), 50, 50);
 	}
 	
+	public void renderDot(int x, int y) {
+		sameTeam = false;
+		Game.g.fillOval(x + 20, y + 20, 10, 10);
+		for (Tile t : Tile.tiles) {
+			if(x == t.x && y == t.y) {
+				for(Piece p : Piece.pieces) {
+					if(p.p.getX() == x && p.p.getY() == y && p.isBlack == this.isBlack)
+							sameTeam = true;
+				}
+				if (!sameTeam)
+					t.enterable = true;
+			}
+		}
+	}
+	
+	public void makeDots() {
+	}
+	
+	public void deleteDots() {
+		
+	}
+	
 	public void tick() {
 		moveUp();
 		moveDown();
 		moveLeft();
 		moveRight();
-		delete();
 		create();
 	}
 	
@@ -57,9 +83,9 @@ public class Piece {
 	}
 	
 	public void delete() {
-		if (Game.km.del) {
+			p.setX(500);
+			p.setY(500);
 			img = null;
-		}
 	}
 	
 	

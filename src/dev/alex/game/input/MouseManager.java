@@ -1,10 +1,11 @@
 package dev.alex.game.input;
 
 import java.awt.event.MouseEvent;
+
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-import dev.alex.game.Piece;
+import dev.alex.game.pieces.Piece;
 
 public class MouseManager implements MouseListener, MouseMotionListener{
 

@@ -9,6 +9,7 @@ import dev.alex.game.states.GameState;
 import dev.alex.game.states.MenuState;
 import dev.alex.game.states.State;
 import dev.alex.game.states.StateManager;
+import dev.alex.game.tile.TileS;
 
 public class Game implements Runnable { //Anfang von Klasse.
 	
@@ -32,7 +33,7 @@ public class Game implements Runnable { //Anfang von Klasse.
 	
 	
 	
-	private void render() {
+	public void render() {
 		bs = display.getCanvas().getBufferStrategy();
 		if(bs == null) {
 			display.getCanvas().createBufferStrategy(3);
@@ -64,6 +65,7 @@ public class Game implements Runnable { //Anfang von Klasse.
 		display.getCanvas().addMouseListener(mm);
 		display.getCanvas().addMouseMotionListener(mm);
 		ImgS.loadAll(50, 50);
+		TileS.loadAll();
 		
 		gameState = new GameState(width, height, this);
 		menuState = new MenuState(width, height, this);

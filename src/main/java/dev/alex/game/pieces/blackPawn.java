@@ -33,7 +33,7 @@ public class blackPawn extends blackPiece {
 		}
 		if (!isOccupied)
 			renderDot(p.getX(), p.getY() + 50);
-		if (p.getY() == 50 && !isOccupied2)
+		if (p.getY() == 50 && !isOccupied2 && !isOccupied)
 			renderDot(p.getX(), p.getY() + 100);
 		isOccupied = false;
 		isOccupied2 = false;

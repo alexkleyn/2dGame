@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import dev.alex.game.Game;
 import dev.alex.game.gfx.chessGfx.Position;
 
+
 public class whitePawn extends whitePiece {
 
 	public whitePawn(BufferedImage img, Position p, int id) {
@@ -33,7 +34,7 @@ public class whitePawn extends whitePiece {
 		}
 		if(!isOccupied)
 			renderDot(p.getX(), p.getY() - 50);
-		if(p.getY() == 300 && !isOccupied2)
+		if(p.getY() == 300 && !isOccupied2 && !isOccupied)
 			renderDot(p.getX(), p.getY() - 100);
 		isOccupied = false;
 		isOccupied2 = false;

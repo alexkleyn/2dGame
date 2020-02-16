@@ -1,2 +1,2 @@
-@mvn eclipse:configure-workspace -Declipse.workspace=c:\xtest
+@mvn eclipse:configure-workspace -Declipse.workspace=C:\Users\Anna\eclipse-workspace
 @if errorlevel 1 pause

@@ -61,7 +61,6 @@ public class GameState extends State {
                                             && piece.p.getY() == p.p.getY()
                                             && piece.getId() != p.getId()
                                             && piece.isBlack != p.isBlack) {
-                                        System.out.println("deleted: " + p.getId());
                                         p.delete();
                                     }
                                 }

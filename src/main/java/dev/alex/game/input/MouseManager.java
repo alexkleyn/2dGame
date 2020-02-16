@@ -13,7 +13,11 @@ public class MouseManager implements MouseListener, MouseMotionListener{
 	private boolean rightPressed = false;
 	private int mouseX;
 	private int mouseY;
-	
+
+	public void setLeftPressed(boolean b) {
+		leftPressed = b;
+	}
+
 	public boolean getLeftPressed() {
 		return leftPressed;
 	}

@@ -9,6 +9,9 @@ import dev.alex.game.tile.Tile;
 
 public class Piece {
 
+	public boolean canRochade2 = true;
+	public boolean canRochade = true;
+	public boolean wasMoved = false;
     public boolean sameTeam = false;
     public boolean isBlack;
     public Graphics g;

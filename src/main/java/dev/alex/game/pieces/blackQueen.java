@@ -15,20 +15,32 @@ public class blackQueen extends blackPiece {
     @Override
     public void makeDots() {
         Game.g.setColor(Color.red);
-	    for (int x = 0; x < width; x += 50) {
-		    renderDot(x, p.getY());
-		    if (isPieceObstructing(this, x, p.getY())) {
-			    break;
-		    }
-	    }
-
-
-	    for (int y = 0; y < width; y += 50) {
-		    renderDot(p.getX(), y);
-		    if(isPieceObstructing(this, p.getX(), y)) {
-			    break;
-		    }
-	    }
+        for(int x = this.p.getX(); x < width; x += 50) {
+				renderDot(x, this.p.getY());
+			if(isPieceObstructing(this, x, p.getY())) {
+				break;
+			}
+		}
+		for(int x = this.p.getX(); x > -50; x -= 50) {
+			renderDot(x, this.p.getY());
+			if(isPieceObstructing(this, x, p.getY())) {
+				break;
+			}
+		}
+		
+		
+		for(int y = this.p.getY(); y < width; y+= 50) {
+			renderDot(this.p.getX(), y);
+			if(isPieceObstructing(this, p.getX(), y)) {
+				break;
+			}
+		}
+		for(int y = this.p.getY(); y > -50; y-= 50) {
+			renderDot(this.p.getX(), y);
+			if(isPieceObstructing(this, p.getX(), y)) {
+				break;
+			}
+		}
 
         //Diagonalen
         for (int x = p.getX(), Y = p.getY(); x < width && Y < height; x += 50) {

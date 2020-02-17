@@ -20,10 +20,18 @@ public class ImgS {		// Assets
 	public static BufferedImage ImgBlackRook;
 	public static BufferedImage ImgBlackPawn;
 	
+	public static BufferedImage settingsBlock;
+	public static BufferedImage gameStartBlock;
 	
+	public static BufferedImage chess3dThumb;
+	public static BufferedImage chessBluePinkThumb;
+	public static BufferedImage chessMedievalThumb;
+	public static BufferedImage chessNormalThumb;
+	
+	public static String spritePath = "/textures/chessNormal.png";
 		
 	private static BufferedImage loadChessPieceSheet(int x, int y, int width, int height) {
-		return new SpriteSheet(ImageLoader.loadImage("/textures/chess.png")).crop(x, y, width, height);
+		return new SpriteSheet(ImageLoader.loadImage(spritePath)).crop(x, y, width, height);
 	}
 
 	public static void loadAll (int width, int height) {
@@ -40,5 +48,13 @@ public class ImgS {		// Assets
 		ImgBlackKnight = loadChessPieceSheet (3*width, 1*height, width, height);
 		ImgBlackRook = loadChessPieceSheet (4*width, 1*height, width, height);
 		ImgBlackPawn = loadChessPieceSheet (5*width, 1*height, width, height);
+		
+		gameStartBlock = ImageLoader.loadImage("/textures/gameStartBlock.png");
+		settingsBlock = ImageLoader.loadImage("/textures/settingsBlock.png");
+		
+		chess3dThumb = ImageLoader.loadImage("/textures/chess3dThumb.png");
+		chessBluePinkThumb = ImageLoader.loadImage("/textures/chessBluePinkThumb.png");
+		chessMedievalThumb = ImageLoader.loadImage("/textures/chessMedievalThumb.png");
+		chessNormalThumb = ImageLoader.loadImage("/textures/chessNormalThumb.png");
 	}
 }

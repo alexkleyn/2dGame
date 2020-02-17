@@ -43,6 +43,44 @@ public class PieceS {
     public static Piece blackPawn7 = new blackPawn(ImgS.ImgBlackPawn, pS.pBlackPawn7, 30);
     public static Piece blackPawn8 = new blackPawn(ImgS.ImgBlackPawn, pS.pBlackPawn8, 31);
 
+    public static void loadAll() {
+    	whiteKing = new whiteKing(ImgS.ImgWhiteKing, pS.pWhiteKing, 0);
+        whiteQueen = new whiteQueen(ImgS.ImgWhiteQueen, pS.pWhiteQueen, 1);
+        whiteBishop = new WhiteBishop(ImgS.ImgWhiteBishop, pS.pWhiteBishop, 2);
+        whiteBishop2 = new WhiteBishop(ImgS.ImgWhiteBishop, pS.pWhiteBishop2, 3);
+        whiteKnight = new whiteKnight(ImgS.ImgWhiteKnight, pS.pWhiteKnight, 4);
+        whiteKnight2 = new whiteKnight(ImgS.ImgWhiteKnight, pS.pWhiteKnight2, 5);
+        whiteRook = new whiteRook(ImgS.ImgWhiteRook, pS.pWhiteRook, 6);
+        whiteRook2 = new whiteRook(ImgS.ImgWhiteRook, pS.pWhiteRook2, 7);
+
+
+        whitePawn = new whitePawn(ImgS.ImgWhitePawn, pS.pWhitePawn, 8);
+        whitePawn2 = new whitePawn(ImgS.ImgWhitePawn, pS.pWhitePawn2, 9);
+        whitePawn3 = new whitePawn(ImgS.ImgWhitePawn, pS.pWhitePawn3, 10);
+        whitePawn4 = new whitePawn(ImgS.ImgWhitePawn, pS.pWhitePawn4, 11);
+        whitePawn5 = new whitePawn(ImgS.ImgWhitePawn, pS.pWhitePawn5, 12);
+        whitePawn6 = new whitePawn(ImgS.ImgWhitePawn, pS.pWhitePawn6, 13);
+        whitePawn7 = new whitePawn(ImgS.ImgWhitePawn, pS.pWhitePawn7, 14);
+        whitePawn8 = new whitePawn(ImgS.ImgWhitePawn, pS.pWhitePawn8, 15);
+
+        blackKing = new blackKing(ImgS.ImgBlackKing, pS.pBlackKing, 16);
+        blackQueen = new blackQueen(ImgS.ImgBlackQueen, pS.pBlackQueen, 17);
+        blackBishop = new blackBishop(ImgS.ImgBlackBishop, pS.pBlackBishop, 18);
+        blackBishop2 = new blackBishop(ImgS.ImgBlackBishop, pS.pBlackBishop2, 19);
+        blackKnight = new blackKnight(ImgS.ImgBlackKnight, pS.pBlackKnight, 20);
+        blackKnight2 = new blackKnight(ImgS.ImgBlackKnight, pS.pBlackKnight2, 21);
+        blackRook = new blackRook(ImgS.ImgBlackRook, pS.pBlackRook, 22);
+        blackRook2 = new blackRook(ImgS.ImgBlackRook, pS.pBlackRook2, 23);
+
+        blackPawn = new blackPawn(ImgS.ImgBlackPawn, pS.pBlackPawn, 24);
+        blackPawn2 = new blackPawn(ImgS.ImgBlackPawn, pS.pBlackPawn2, 25);
+        blackPawn3 = new blackPawn(ImgS.ImgBlackPawn, pS.pBlackPawn3, 26);
+        blackPawn4 = new blackPawn(ImgS.ImgBlackPawn, pS.pBlackPawn4, 27);
+        blackPawn5 = new blackPawn(ImgS.ImgBlackPawn, pS.pBlackPawn5, 28);
+        blackPawn6 = new blackPawn(ImgS.ImgBlackPawn, pS.pBlackPawn6, 29);
+        blackPawn7 = new blackPawn(ImgS.ImgBlackPawn, pS.pBlackPawn7, 30);
+        blackPawn8 = new blackPawn(ImgS.ImgBlackPawn, pS.pBlackPawn8, 31);
+    }
 //    static {
 //        for (int i = 0; i < 8; i++) {
 //            Piece pawn = new whitePawn(ImgS.ImgWhitePawn, pS.pWhitePawn, i + 8);

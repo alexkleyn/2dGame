@@ -17,12 +17,15 @@ public class KeyManager implements KeyListener {
 	public boolean k;
 	public boolean c;
 	
+	public boolean esc;
 	
 	public KeyManager() {
 		keys = new boolean[256];
 	}
 	
 	public void tick() {
+		esc = keys[KeyEvent.VK_ESCAPE];
+		
 		up = keys[KeyEvent.VK_W];
 		down = keys[KeyEvent.VK_S];
 		left = keys[KeyEvent.VK_A];

@@ -2,6 +2,7 @@ package dev.alex.game.states;
 
 import java.awt.*;
 
+
 import dev.alex.game.Game;
 import dev.alex.game.Launcher;
 import dev.alex.game.gfx.chessGfx.ImgS;
@@ -21,8 +22,9 @@ public class GameState extends State {
     Piece piece;
 
     public void tick() {
+    	if (Game.km.esc)
+			StateManager.setState(game.menuState);
         pieceDrag();
-        changeActor("white");
         currentActor.tick();
 
     }
@@ -38,7 +40,7 @@ public class GameState extends State {
                     currentActor = piece;
                     Game.mm.setLeftPressed(false);
                     while (!Game.mm.getLeftPressed()) {
-                        Launcher.game1.render();
+                        Launcher.game.render();
                         int bumpX = (Game.mm.getMouseX() % 50);
                         newPosX = (Game.mm.getMouseX() - bumpX);
                         int bumpY = (Game.mm.getMouseY() % 50);
@@ -51,6 +53,23 @@ public class GameState extends State {
                             if (newPosX == t.x && newPosY == t.y && t.enterable) {
                                 piece.p.setX(newPosX);
                                 piece.p.setY(newPosY);
+                                if (piece == PieceS.whiteKing && !piece.wasMoved &&
+                                		piece.p.getX() == 50 && piece.p.getY() == 350) {
+                                	PieceS.whiteRook.p.setX(100);
+                                }
+                                if (piece == PieceS.blackKing && !piece.wasMoved &&
+                                		piece.p.getX() == 50 && piece.p.getY() == 0) {
+                                	PieceS.blackRook.p.setX(100);
+                                }
+                                if (piece == PieceS.whiteKing && !piece.wasMoved &&
+                                		piece.p.getX() == 250 && piece.p.getY() == 350) {
+                                	PieceS.whiteRook2.p.setX(200);
+                                }
+                                if (piece == PieceS.blackKing && !piece.wasMoved &&
+                                		piece.p.getX() == 250 && piece.p.getY() == 0) {
+                                	PieceS.blackRook2.p.setX(200);
+                                }
+                                piece.wasMoved = true;
                                 if (lastWasBlack) {
                                     lastWasBlack = false;
                                 } else {
@@ -82,30 +101,10 @@ public class GameState extends State {
 
     private void sleep() {
         try {
-            Thread.sleep(100);
+            Thread.sleep(50);
         }
         catch (InterruptedException e) {
 
-        }
-    }
-
-    public void changeActor(String color) {
-        if (color == "white" || color == "White") {
-            if (Game.km.q) {
-                currentActor = PieceS.whiteQueen;
-            }
-            if (Game.km.k) {
-                currentActor = PieceS.whiteKing;
-            }
-        } else if (color == "black" || color == "Black") {
-            if (Game.km.q) {
-                currentActor = PieceS.blackQueen;
-            }
-            if (Game.km.k) {
-                currentActor = PieceS.blackKing;
-            }
-        } else {
-            System.out.println("Wrong value given for 'changeActor'.");
         }
     }
 

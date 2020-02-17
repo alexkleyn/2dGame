@@ -7,6 +7,7 @@ import dev.alex.game.input.KeyManager;
 import dev.alex.game.input.MouseManager;
 import dev.alex.game.states.GameState;
 import dev.alex.game.states.MenuState;
+import dev.alex.game.states.SettingsState;
 import dev.alex.game.states.State;
 import dev.alex.game.states.StateManager;
 import dev.alex.game.tile.TileS;
@@ -28,8 +29,9 @@ public class Game implements Runnable { //Anfang von Klasse.
 	public static KeyManager km = new KeyManager();
 	public static MouseManager mm = new MouseManager();
 	
-	public static State gameState;
+	public State gameState;
 	public State menuState;
+	public State settingsState;
 	
 	
 	
@@ -69,7 +71,8 @@ public class Game implements Runnable { //Anfang von Klasse.
 		
 		gameState = new GameState(width, height, this);
 		menuState = new MenuState(width, height, this);
-		StateManager.setState(gameState);
+		settingsState = new SettingsState(width, height, this);
+		StateManager.setState(menuState);
 	}
 	
 	public void run() {

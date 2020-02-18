@@ -9,7 +9,10 @@ import dev.alex.game.tile.Tile;
 
 public class Piece {
 
-	public boolean canRochade2 = true;
+    public static final int OFFSET = 50;
+
+
+    public boolean canRochade2 = true;
 	public boolean canRochade = true;
 	public boolean wasMoved = false;
     public boolean sameTeam = false;
@@ -38,7 +41,7 @@ public class Piece {
         imgBackup = img;
         this.id = id;
         pieces[id] = this;
-        bounds = new Rectangle(p.getX(), p.getY(), 50, 50);
+        bounds = new Rectangle(p.getX(), p.getY(), OFFSET, OFFSET);
     }
 
     public void renderDot(int x, int y) {
@@ -96,7 +99,7 @@ public class Piece {
     public void moveUp() {
         waitValue = System.nanoTime();
         if (Game.km.up && p.getY() > 0 && waitValue - wait > 150000000) {
-            int newY = p.getY() - 50;
+            int newY = p.getY() - OFFSET;
             while (p.getY() > newY) {
                 p.setY(p.getY() - 1);
                 wait = System.nanoTime();
@@ -107,7 +110,7 @@ public class Piece {
     public void moveDown() {
         waitValue = System.nanoTime();
         if (Game.km.down && p.getY() < 350 && waitValue - wait > 150000000) {
-            int newY = p.getY() + 50;
+            int newY = p.getY() + OFFSET;
             while (p.getY() < newY) {
                 p.setY(p.getY() + 1);
                 wait = System.nanoTime();
@@ -118,7 +121,7 @@ public class Piece {
     public void moveRight() {
         waitValue = System.nanoTime();
         if (Game.km.right && p.getX() < 350 && waitValue - wait > 150000000) {
-            int newX = p.getX() + 50;
+            int newX = p.getX() + OFFSET;
 	        while (p.getX() < newX) {
 		        p.setX(p.getX() + 1);
 	        }
@@ -129,7 +132,7 @@ public class Piece {
     public void moveLeft() {
         waitValue = System.nanoTime();
         if (Game.km.left && p.getX() > 0 && waitValue - wait > 150000000) {
-            int newX = p.getX() - 50;
+            int newX = p.getX() - OFFSET;
             while (p.getX() > newX) {
                 p.setX(p.getX() - 1);
                 wait = System.nanoTime();

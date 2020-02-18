@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import dev.alex.game.Game;
 import dev.alex.game.gfx.chessGfx.Position;
 
-public class WhiteBishop extends whitePiece {
+public class WhiteBishop extends WhitePiece {
 
 	public WhiteBishop(BufferedImage img, Position p, int id) {
 		super(img, p, id);
@@ -18,36 +18,36 @@ public class WhiteBishop extends whitePiece {
 		Game.g.setColor(Color.red);
 		//Diagonalen
 		//Unten rechts
-		for(int x = p.getX() + 50, Y = p.getY() + 50; x < width && Y < height; x += 50) {
+		for(int x = p.getX() + OFFSET, Y = p.getY() + OFFSET; x < width && Y < height; x += OFFSET) {
 			renderDot(x, Y);
 			if(isPieceObstructing(this, x, Y)) {
 				break;
 			}
-			Y += 50;
+			Y += OFFSET;
 		}
 		//Oben links
-		for(int x = p.getX() - 50, Y = p.getY() - 50; x > -50 && Y > -50; x -= 50) {
+		for(int x = p.getX() - OFFSET, Y = p.getY() - OFFSET; x > -OFFSET && Y > -OFFSET; x -= OFFSET) {
 			renderDot(x, Y);
 			if(isPieceObstructing(this, x, Y)) {
 				break;
 			}
-			Y -= 50;
+			Y -= OFFSET;
 		}
 		//Unten links
-		for(int x = p.getX() - 50, Y = p.getY() + 50; x > -50 && Y < height; x -= 50) {
+		for(int x = p.getX() - OFFSET, Y = p.getY() + OFFSET; x > -OFFSET && Y < height; x -= OFFSET) {
 			renderDot(x, Y);
 			if(isPieceObstructing(this, x, Y)) {
 				break;
 			}
-			Y += 50;
+			Y += OFFSET;
 		}
 		//Oben rechts
-		for(int x = p.getX() + 50, Y = p.getY() - 50; x < width && Y > -50; x += 50) {
+		for(int x = p.getX() + OFFSET, Y = p.getY() - OFFSET; x < width && Y > -OFFSET; x += OFFSET) {
 			renderDot(x, Y);
 			if(isPieceObstructing(this, x, Y)) {
 				break;
 			}
-			Y -= 50;
+			Y -= OFFSET;
 		}
 	}
 

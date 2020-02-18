@@ -6,9 +6,9 @@ import java.awt.image.BufferedImage;
 import dev.alex.game.Game;
 import dev.alex.game.gfx.chessGfx.Position;
 
-public class blackKnight extends blackPiece {
+public class BlackKnight extends BlackPiece {
 
-	public blackKnight(BufferedImage img, Position p, int id) {
+	public BlackKnight(BufferedImage img, Position p, int id) {
 		super(img, p, id);
 	}
 	

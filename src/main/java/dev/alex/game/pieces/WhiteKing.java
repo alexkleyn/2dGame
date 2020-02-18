@@ -5,34 +5,33 @@ import java.awt.image.BufferedImage;
 
 import dev.alex.game.Game;
 import dev.alex.game.gfx.chessGfx.Position;
-import dev.alex.game.tile.TileS;
 
-public class whiteKing extends whitePiece{
+public class WhiteKing extends WhitePiece {
 	
 	
-	public whiteKing(BufferedImage img, Position p, int id) {
+	public WhiteKing(BufferedImage img, Position p, int id) {
 		super(img, p, id);
 	}
 	
 	@Override
 	public void makeDots() {
 		Game.g.setColor(Color.red);
-		renderDot(p.getX() + 50, p.getY() + 50);
-		renderDot(p.getX() + 50, p.getY());
-		renderDot(p.getX() + 50, p.getY() - 50);
+		renderDot(p.getX() + OFFSET, p.getY() + OFFSET);
+		renderDot(p.getX() + OFFSET, p.getY());
+		renderDot(p.getX() + OFFSET, p.getY() - OFFSET);
 		
-		renderDot(p.getX(), p.getY() + 50);
+		renderDot(p.getX(), p.getY() + OFFSET);
 		renderDot(p.getX(), p.getY());
-		renderDot(p.getX(), p.getY() - 50);
+		renderDot(p.getX(), p.getY() - OFFSET);
 		
-		renderDot(p.getX() - 50, p.getY() + 50);
-		renderDot(p.getX() - 50, p.getY());
-		renderDot(p.getX() - 50, p.getY() - 50);
+		renderDot(p.getX() - OFFSET, p.getY() + OFFSET);
+		renderDot(p.getX() - OFFSET, p.getY());
+		renderDot(p.getX() - OFFSET, p.getY() - OFFSET);
 		
 		
 		if (!wasMoved && !PieceS.whiteRook.wasMoved) {
 			for (Piece p : Piece.pieces) {
-				if (p.p.getX() == 50 && p.p.getY() == 350) {
+				if (p.p.getX() == OFFSET && p.p.getY() == 350) {
 					canRochade = false;
 				}
 			}
@@ -42,7 +41,7 @@ public class whiteKing extends whitePiece{
 				}
 			}
 			if (canRochade) {
-				renderDot(50, 350);
+				renderDot(OFFSET, 350);
 			}
 		}
 		if (!wasMoved && !PieceS.whiteRook2.wasMoved) {

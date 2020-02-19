@@ -13,10 +13,10 @@ public class SettingsState extends State{
 	private int width;
 	private int height;
 	public Graphics g;
-	public Rectangle bounds = new Rectangle(50, 50, 120, 120);
-	public Rectangle bounds2 = new Rectangle(50, 230, 120, 120);
-	public Rectangle bounds3 = new Rectangle(230, 50, 120, 120);
-	public Rectangle bounds4 = new Rectangle(230, 230, 120, 120);
+	public Rectangle bounds = new Rectangle(Tile.rectSize, Tile.rectSize, 2*Tile.rectSize + (Tile.rectSize/5)*2, 2*Tile.rectSize + (Tile.rectSize/5)*2);
+	public Rectangle bounds2 = new Rectangle(Tile.rectSize, 4*Tile.rectSize + (Tile.rectSize/5)*3, 2*Tile.rectSize + (Tile.rectSize/5)*2, 2*Tile.rectSize + (Tile.rectSize/5)*2);
+	public Rectangle bounds3 = new Rectangle(4*Tile.rectSize + (Tile.rectSize/5)*3, Tile.rectSize, 2*Tile.rectSize + (Tile.rectSize/5)*2, 2*Tile.rectSize + (Tile.rectSize/5)*2);
+	public Rectangle bounds4 = new Rectangle(4*Tile.rectSize + (Tile.rectSize/5)*3, 4*Tile.rectSize + (Tile.rectSize/5)*3, 2*Tile.rectSize + (Tile.rectSize/5)*2, 2*Tile.rectSize + (Tile.rectSize/5)*2);
 
 	public SettingsState(int width, int height, Game game) {
 		super(game);
@@ -53,9 +53,9 @@ public class SettingsState extends State{
 
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(ImgS.chess3dThumb, 50, 50, null);
-		g.drawImage(ImgS.chessBluePinkThumb, 50, 230, null);
-		g.drawImage(ImgS.chessMedievalThumb, 230, 50, null);
-		g.drawImage(ImgS.chessNormalThumb, 230, 230, null);
+		g.drawImage(ImgS.chess3dThumb, Tile.rectSize, Tile.rectSize, null);
+		g.drawImage(ImgS.chessBluePinkThumb, Tile.rectSize, 4*Tile.rectSize + (Tile.rectSize/5)*3, null);
+		g.drawImage(ImgS.chessMedievalThumb, 4*Tile.rectSize + (Tile.rectSize/5)*3, Tile.rectSize, null);
+		g.drawImage(ImgS.chessNormalThumb, 4*Tile.rectSize + (Tile.rectSize/5)*3, 4*Tile.rectSize + (Tile.rectSize/5)*3, null);
 	}
 }

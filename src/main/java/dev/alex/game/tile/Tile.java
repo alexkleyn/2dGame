@@ -14,7 +14,7 @@ public class Tile {
 	public int y;
 	private Color color;
 	private final int id;
-	public static int rectSize = 70;
+	public static int rectSize = 80;
 	public static Color black = new Color(50, 50, 50);
 	public static Color white = new Color(200, 200, 200);
 	public boolean enterable;

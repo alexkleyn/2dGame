@@ -7,14 +7,15 @@ import java.awt.Rectangle;
 import dev.alex.game.Game;
 import dev.alex.game.gfx.chessGfx.ImgS;
 import dev.alex.game.input.MouseManager;
+import dev.alex.game.tile.Tile;
 
 public class MenuState extends State {
 
 	public int width;
 	public int height;
 	public Graphics g;
-	public Rectangle gameStartBounds = new Rectangle(50, 180, 300, 50);
-	public Rectangle settingsBounds = new Rectangle(50, 280, 300, 50);
+	public Rectangle gameStartBounds = new Rectangle(Tile.rectSize, 4*Tile.rectSize - (Tile.rectSize/5)*2, 6*Tile.rectSize, Tile.rectSize);
+	public Rectangle settingsBounds = new Rectangle(Tile.rectSize, 6*Tile.rectSize - (Tile.rectSize/5)*2, 6*Tile.rectSize, Tile.rectSize);
 	
 	public MenuState(int width, int height, Game game) {
 		super(game);
@@ -35,7 +36,7 @@ public class MenuState extends State {
 	}
 	
 	public void render(Graphics g) {
-		g.drawImage(ImgS.gameStartBlock, 50, 180, null);
-		g.drawImage(ImgS.settingsBlock, 50, 280, null);
+		g.drawImage(ImgS.gameStartBlock, Tile.rectSize, 4*Tile.rectSize - (Tile.rectSize/5)*2, null);
+		g.drawImage(ImgS.settingsBlock, Tile.rectSize, 6*Tile.rectSize - (Tile.rectSize/5)*2, null);
 	}
 }

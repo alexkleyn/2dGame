@@ -1,5 +1,6 @@
 package dev.alex.game.pieces;
 
+import dev.alex.game.tile.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -15,8 +16,8 @@ public class Piece {
     public boolean sameTeam = false;
     public boolean isBlack;
     public Graphics g;
-    public int width = 400;
-    public int height = 400;
+    public int width = 8*Tile.rectSize;
+    public int height = 8*Tile.rectSize;
     private final int id;
     private BufferedImage imgBackup;
     private BufferedImage img;
@@ -38,12 +39,12 @@ public class Piece {
         imgBackup = img;
         this.id = id;
         pieces[id] = this;
-        bounds = new Rectangle(p.getX(), p.getY(), 50, 50);
+        bounds = new Rectangle(p.getX(), p.getY(), Tile.rectSize, Tile.rectSize);
     }
 
     public void renderDot(int x, int y) {
         sameTeam = false;
-        Game.g.fillOval(x + 20, y + 20, 10, 10);
+        Game.g.fillOval(x + (Tile.rectSize/5)*2, y + (Tile.rectSize/5)*2, Tile.rectSize/5, Tile.rectSize/5);
         for (Tile t : Tile.tiles) {
             if (x == t.x && y == t.y) {
                 for (Piece p : Piece.pieces) {
@@ -66,10 +67,6 @@ public class Piece {
     }
 
     public void tick() {
-        moveUp();
-        moveDown();
-        moveLeft();
-        moveRight();
         create();
     }
 
@@ -87,54 +84,9 @@ public class Piece {
     }
 
     public void delete() {
-        p.setX(500);
-        p.setY(500);
+        p.setX(10*Tile.rectSize);
+        p.setY(10*Tile.rectSize);
         img = null;
-    }
-
-
-    public void moveUp() {
-        waitValue = System.nanoTime();
-        if (Game.km.up && p.getY() > 0 && waitValue - wait > 150000000) {
-            int newY = p.getY() - 50;
-            while (p.getY() > newY) {
-                p.setY(p.getY() - 1);
-                wait = System.nanoTime();
-            }
-        }
-    }
-
-    public void moveDown() {
-        waitValue = System.nanoTime();
-        if (Game.km.down && p.getY() < 350 && waitValue - wait > 150000000) {
-            int newY = p.getY() + 50;
-            while (p.getY() < newY) {
-                p.setY(p.getY() + 1);
-                wait = System.nanoTime();
-            }
-        }
-    }
-
-    public void moveRight() {
-        waitValue = System.nanoTime();
-        if (Game.km.right && p.getX() < 350 && waitValue - wait > 150000000) {
-            int newX = p.getX() + 50;
-	        while (p.getX() < newX) {
-		        p.setX(p.getX() + 1);
-	        }
-            wait = System.nanoTime();
-        }
-    }
-
-    public void moveLeft() {
-        waitValue = System.nanoTime();
-        if (Game.km.left && p.getX() > 0 && waitValue - wait > 150000000) {
-            int newX = p.getX() - 50;
-            while (p.getX() > newX) {
-                p.setX(p.getX() - 1);
-                wait = System.nanoTime();
-            }
-        }
     }
 
     public int getId() {

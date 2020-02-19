@@ -5,8 +5,9 @@ import java.awt.image.BufferedImage;
 
 import dev.alex.game.Game;
 import dev.alex.game.gfx.chessGfx.Position;
+import dev.alex.game.tile.Tile;
 
-public class WhiteBishop extends whitePiece {
+public class WhiteBishop extends WhitePiece {
 
 	public WhiteBishop(BufferedImage img, Position p, int id) {
 		super(img, p, id);
@@ -18,36 +19,36 @@ public class WhiteBishop extends whitePiece {
 		Game.g.setColor(Color.red);
 		//Diagonalen
 		//Unten rechts
-		for(int x = p.getX() + 50, Y = p.getY() + 50; x < width && Y < height; x += 50) {
+		for(int x = p.getX() + Tile.rectSize, Y = p.getY() + Tile.rectSize; x < width && Y < height; x += Tile.rectSize) {
 			renderDot(x, Y);
 			if(isPieceObstructing(this, x, Y)) {
 				break;
 			}
-			Y += 50;
+			Y += Tile.rectSize;
 		}
 		//Oben links
-		for(int x = p.getX() - 50, Y = p.getY() - 50; x > -50 && Y > -50; x -= 50) {
+		for(int x = p.getX() - Tile.rectSize, Y = p.getY() -Tile.rectSize; x > -Tile.rectSize && Y > -Tile.rectSize; x -= Tile.rectSize) {
 			renderDot(x, Y);
 			if(isPieceObstructing(this, x, Y)) {
 				break;
 			}
-			Y -= 50;
+			Y -= Tile.rectSize;
 		}
 		//Unten links
-		for(int x = p.getX() - 50, Y = p.getY() + 50; x > -50 && Y < height; x -= 50) {
+		for(int x = p.getX() - Tile.rectSize, Y = p.getY() + Tile.rectSize; x > -Tile.rectSize && Y < height; x -= Tile.rectSize) {
 			renderDot(x, Y);
 			if(isPieceObstructing(this, x, Y)) {
 				break;
 			}
-			Y += 50;
+			Y += Tile.rectSize;
 		}
 		//Oben rechts
-		for(int x = p.getX() + 50, Y = p.getY() - 50; x < width && Y > -50; x += 50) {
+		for(int x = p.getX() + Tile.rectSize, Y = p.getY() - Tile.rectSize; x < width && Y > -Tile.rectSize; x += Tile.rectSize) {
 			renderDot(x, Y);
 			if(isPieceObstructing(this, x, Y)) {
 				break;
 			}
-			Y -= 50;
+			Y -= Tile.rectSize;
 		}
 	}
 

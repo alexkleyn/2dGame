@@ -4,12 +4,14 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 import dev.alex.game.Game;
+import dev.alex.game.gfx.chessGfx.ImgS;
 import dev.alex.game.gfx.chessGfx.Position;
+import dev.alex.game.tile.Tile;
 
 
-public class whitePawn extends whitePiece {
+public class WhitePawn extends WhitePiece {
 
-	public whitePawn(BufferedImage img, Position p, int id) {
+	public WhitePawn(BufferedImage img, Position p, int id) {
 		super(img, p, id);
 	}
 	
@@ -19,23 +21,23 @@ public class whitePawn extends whitePiece {
 		boolean isOccupied2 = false;
 		Game.g.setColor(Color.red);
 		for(Piece p : Piece.pieces) {
-			if(p.p.getX() == this.p.getX() - 50 && p.p.getY() == this.p.getY() - 50 && p.isBlack != this.isBlack) {
-				renderDot(this.p.getX() - 50, this.p.getY() - 50);
+			if(p.p.getX() == this.p.getX() - Tile.rectSize && p.p.getY() == this.p.getY() - Tile.rectSize && p.isBlack != this.isBlack) {
+				renderDot(this.p.getX() - Tile.rectSize, this.p.getY() - Tile.rectSize);
 			}
-			if(p.p.getX() == this.p.getX() + 50 && p.p.getY() == this.p.getY() - 50 && p.isBlack != this.isBlack) {
-				renderDot(this.p.getX() + 50, this.p.getY() - 50);
+			if(p.p.getX() == this.p.getX() + Tile.rectSize && p.p.getY() == this.p.getY() - Tile.rectSize && p.isBlack != this.isBlack) {
+				renderDot(this.p.getX() + Tile.rectSize, this.p.getY() - Tile.rectSize);
 			}
-			if(this.p.getX() == p.p.getX() && this.p.getY() - 50 == p.p.getY()) {
+			if(this.p.getX() == p.p.getX() && this.p.getY() - Tile.rectSize == p.p.getY()) {
 				isOccupied = true;
 			}
-			if(this.p.getX() == p.p.getX() && this.p.getY() - 100 == p.p.getY()) {
+			if(this.p.getX() == p.p.getX() && this.p.getY() - 2*Tile.rectSize == p.p.getY()) {
 				isOccupied2 = true;
 			}
 		}
 		if(!isOccupied)
-			renderDot(p.getX(), p.getY() - 50);
-		if(p.getY() == 300 && !isOccupied2 && !isOccupied)
-			renderDot(p.getX(), p.getY() - 100);
+			renderDot(p.getX(), p.getY() - Tile.rectSize);
+		if(p.getY() == 6*Tile.rectSize && !isOccupied2 && !isOccupied)
+			renderDot(p.getX(), p.getY() - 2*Tile.rectSize);
 		isOccupied = false;
 		isOccupied2 = false;
 	}

@@ -14,7 +14,7 @@ public class Tile {
 	public int y;
 	private Color color;
 	private final int id;
-	public static int rectSize = 50;
+	public static int rectSize = 70;
 	public static Color black = new Color(50, 50, 50);
 	public static Color white = new Color(200, 200, 200);
 	public boolean enterable;
@@ -29,7 +29,7 @@ public class Tile {
 		this.y = y;
 		this.color = color;
 		this.id = id;
-		TileBounds = new Rectangle(x, y, 50, 50);
+		TileBounds = new Rectangle(x, y, rectSize, rectSize);
 		tiles[id] = this;
 	}
 	
@@ -43,6 +43,6 @@ public class Tile {
 	
 	public void render(Graphics g) {
 		g.setColor(color);
-		g.fillRect(x, y, 50, 50);
+		g.fillRect(x, y, rectSize, rectSize);
 	}
 }

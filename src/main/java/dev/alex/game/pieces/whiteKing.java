@@ -5,64 +5,65 @@ import java.awt.image.BufferedImage;
 
 import dev.alex.game.Game;
 import dev.alex.game.gfx.chessGfx.Position;
+import dev.alex.game.tile.Tile;
 import dev.alex.game.tile.TileS;
 
-public class whiteKing extends whitePiece{
+public class WhiteKing extends WhitePiece{
 	
 	
-	public whiteKing(BufferedImage img, Position p, int id) {
+	public WhiteKing(BufferedImage img, Position p, int id) {
 		super(img, p, id);
 	}
 	
 	@Override
 	public void makeDots() {
 		Game.g.setColor(Color.red);
-		renderDot(p.getX() + 50, p.getY() + 50);
-		renderDot(p.getX() + 50, p.getY());
-		renderDot(p.getX() + 50, p.getY() - 50);
+		renderDot(p.getX() + Tile.rectSize, p.getY() + Tile.rectSize);
+		renderDot(p.getX() + Tile.rectSize, p.getY());
+		renderDot(p.getX() + Tile.rectSize, p.getY() - Tile.rectSize);
 		
-		renderDot(p.getX(), p.getY() + 50);
+		renderDot(p.getX(), p.getY() + Tile.rectSize);
 		renderDot(p.getX(), p.getY());
-		renderDot(p.getX(), p.getY() - 50);
+		renderDot(p.getX(), p.getY() - Tile.rectSize);
 		
-		renderDot(p.getX() - 50, p.getY() + 50);
-		renderDot(p.getX() - 50, p.getY());
-		renderDot(p.getX() - 50, p.getY() - 50);
+		renderDot(p.getX() - Tile.rectSize, p.getY() + Tile.rectSize);
+		renderDot(p.getX() - Tile.rectSize, p.getY());
+		renderDot(p.getX() - Tile.rectSize, p.getY() - Tile.rectSize);
 		
 		
 		if (!wasMoved && !PieceS.whiteRook.wasMoved) {
 			for (Piece p : Piece.pieces) {
-				if (p.p.getX() == 50 && p.p.getY() == 350) {
+				if (p.p.getX() == Tile.rectSize && p.p.getY() == 7*Tile.rectSize) {
 					canRochade = false;
 				}
 			}
 			for (Piece p : Piece.pieces) {
-				if (p.p.getX() == 100 && p.p.getY() == 350) {
+				if (p.p.getX() == 2*Tile.rectSize && p.p.getY() == 7*Tile.rectSize) {
 					canRochade = false;
 				}
 			}
 			if (canRochade) {
-				renderDot(50, 350);
+				renderDot(Tile.rectSize, 7*Tile.rectSize);
 			}
 		}
 		if (!wasMoved && !PieceS.whiteRook2.wasMoved) {
 			for (Piece p : Piece.pieces) {
-				if (p.p.getX() == 250 && p.p.getY() == 350) {
+				if (p.p.getX() == 5*Tile.rectSize && p.p.getY() == 7*Tile.rectSize) {
 					canRochade2 = false;
 				}
 			}
 			for (Piece p : Piece.pieces) {
-				if (p.p.getX() == 300 && p.p.getY() == 350) {
+				if (p.p.getX() == 6*Tile.rectSize && p.p.getY() == 7*Tile.rectSize) {
 					canRochade2 = false;
 				}
 			}
 			for (Piece p : Piece.pieces) {
-				if (p.p.getX() == 200 && p.p.getY() == 350) {
+				if (p.p.getX() == 4*Tile.rectSize && p.p.getY() == 7*Tile.rectSize) {
 					canRochade2 = false;
 				}
 			}
 			if (canRochade2) {
-				renderDot(250, 350);
+				renderDot(5*Tile.rectSize, 7*Tile.rectSize);
 			}
 		}
 	}

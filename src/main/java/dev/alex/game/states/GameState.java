@@ -41,9 +41,9 @@ public class GameState extends State {
                     Game.mm.setLeftPressed(false);
                     while (!Game.mm.getLeftPressed()) {
                         Launcher.game.render();
-                        int bumpX = (Game.mm.getMouseX() % 50);
+                        int bumpX = (Game.mm.getMouseX() % Tile.rectSize);
                         newPosX = (Game.mm.getMouseX() - bumpX);
-                        int bumpY = (Game.mm.getMouseY() % 50);
+                        int bumpY = (Game.mm.getMouseY() % Tile.rectSize);
                         newPosY = (Game.mm.getMouseY() - bumpY);
                         //System.out.println("waiting");
                         sleep();
@@ -54,20 +54,20 @@ public class GameState extends State {
                                 piece.p.setX(newPosX);
                                 piece.p.setY(newPosY);
                                 if (piece == PieceS.whiteKing && !piece.wasMoved &&
-                                		piece.p.getX() == 50 && piece.p.getY() == 350) {
-                                	PieceS.whiteRook.p.setX(100);
+                                		piece.p.getX() == Tile.rectSize && piece.p.getY() == 7*Tile.rectSize) {
+                                	PieceS.whiteRook.p.setX(2*Tile.rectSize);
                                 }
                                 if (piece == PieceS.blackKing && !piece.wasMoved &&
-                                		piece.p.getX() == 50 && piece.p.getY() == 0) {
-                                	PieceS.blackRook.p.setX(100);
+                                		piece.p.getX() == Tile.rectSize && piece.p.getY() == 0) {
+                                	PieceS.blackRook.p.setX(2*Tile.rectSize);
                                 }
                                 if (piece == PieceS.whiteKing && !piece.wasMoved &&
-                                		piece.p.getX() == 250 && piece.p.getY() == 350) {
-                                	PieceS.whiteRook2.p.setX(200);
+                                		piece.p.getX() == 5*Tile.rectSize && piece.p.getY() == 7*Tile.rectSize) {
+                                	PieceS.whiteRook2.p.setX(4*Tile.rectSize);
                                 }
                                 if (piece == PieceS.blackKing && !piece.wasMoved &&
-                                		piece.p.getX() == 250 && piece.p.getY() == 0) {
-                                	PieceS.blackRook2.p.setX(200);
+                                		piece.p.getX() == 5*Tile.rectSize && piece.p.getY() == 0) {
+                                	PieceS.blackRook2.p.setX(4*Tile.rectSize);
                                 }
                                 piece.wasMoved = true;
                                 if (lastWasBlack) {

@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import dev.alex.game.Game;
 import dev.alex.game.gfx.chessGfx.ImgS;
 import dev.alex.game.pieces.PieceS;
+import dev.alex.game.tile.Tile;
 
 public class SettingsState extends State{
 	

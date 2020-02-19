@@ -10,6 +10,7 @@ import dev.alex.game.states.MenuState;
 import dev.alex.game.states.SettingsState;
 import dev.alex.game.states.State;
 import dev.alex.game.states.StateManager;
+import dev.alex.game.tile.Tile;
 import dev.alex.game.tile.TileS;
 
 public class Game implements Runnable { //Anfang von Klasse.

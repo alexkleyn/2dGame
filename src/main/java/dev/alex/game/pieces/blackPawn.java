@@ -11,6 +11,7 @@ public class BlackPawn extends BlackPiece {
 
 	public BlackPawn(BufferedImage img, Position p, int id) {
 		super(img, p, id);
+		isPawn = true;
 	}
 	
 	@Override

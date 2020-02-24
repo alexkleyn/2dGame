@@ -1,17 +1,16 @@
 package dev.alex.game.pieces;
 
-import dev.alex.game.tile.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-
 import dev.alex.game.Game;
 import dev.alex.game.gfx.chessGfx.Position;
+import dev.alex.game.states.GameState;
 import dev.alex.game.tile.Tile;
 
 public class Piece {
 
-	public boolean canRochade2 = true;
-	public boolean canRochade = true;
+	public boolean canRochadeRight = true;
+	public boolean canRochadeLeft = true;
 	public boolean wasMoved = false;
     public boolean sameTeam = false;
     public boolean isBlack;
@@ -28,6 +27,7 @@ public class Piece {
     long waitValue = System.nanoTime();
     public Rectangle bounds;
     protected String name = "";
+    public boolean isPawn = false;
 
     public static Piece[] pieces = new Piece[32];
 
@@ -43,27 +43,50 @@ public class Piece {
     }
 
     public void renderDot(int x, int y) {
-        sameTeam = false;
-        Game.g.fillOval(x + (Tile.rectSize/5)*2, y + (Tile.rectSize/5)*2, Tile.rectSize/5, Tile.rectSize/5);
-        for (Tile t : Tile.tiles) {
-            if (x == t.x && y == t.y) {
-                for (Piece p : Piece.pieces) {
-	                if (p.p.getX() == x && p.p.getY() == y && p.isBlack == this.isBlack) {
-		                sameTeam = true;
-	                }
-                }
-	            if (!sameTeam) {
-		            t.enterable = true;
-	            }
-            }
-        }
+    	sameTeam = false;
+    	for (Tile t: Tile.tiles) {
+    		if (x == t.x && y == t.y) {
+    			for (Piece p : Piece.pieces) {
+    				if (p.p.getX() == x && p.p.getY() == y && p.isBlack == this.isBlack) {
+    					sameTeam = true;
+    				}
+    			}
+    			if (!sameTeam) {
+    				t.enterable = true;
+    				Game.g.fillOval(x + (Tile.rectSize/5)*2, y + (Tile.rectSize/5)*2, Tile.rectSize/5, Tile.rectSize/5);
+    			}
+    		}
+    	}
+    }
+    
+    public void renderDotKing(int x, int y) {
+    	sameTeam = false;
+    	for (Tile t: Tile.tiles) {
+    		if (x == t.x && y == t.y) {
+    			for (Piece p : Piece.pieces) {
+    				if (p.p.getX() == x && p.p.getY() == y && p.isBlack == this.isBlack) {
+    					sameTeam = true;
+    				}
+    			}
+    			if (!sameTeam) {
+    				for (Piece p : Piece.pieces) {
+    				// guckt ob da einer hingehen kann.
+    				}
+    				t.enterable = true;
+    				Game.g.fillOval(x + (Tile.rectSize/5)*2, y + (Tile.rectSize/5)*2, Tile.rectSize/5, Tile.rectSize/5);
+    			}
+    		}
+    	}
     }
 
     public void makeDots() {
     }
 
     public void deleteDots() {
-
+    	for (Tile t : Tile.tiles) {
+    		t.enterable = false;
+    	}
+    	GameState.makeDots = false;
     }
 
     public void tick() {
@@ -84,8 +107,8 @@ public class Piece {
     }
 
     public void delete() {
-        p.setX(10*Tile.rectSize);
-        p.setY(10*Tile.rectSize);
+        p.setX(100*Tile.rectSize);
+        p.setY(100*Tile.rectSize);
         img = null;
     }
 
@@ -93,6 +116,14 @@ public class Piece {
         return id;
     }
 
+    public void setImg(BufferedImage img) {
+    	this.img = img;
+    }
+    
+    public BufferedImage getImg() {
+    	return img;
+    }
+    
     public boolean isPieceObstructing(Piece piece, int x, int y) {
         for (Piece p : Piece.pieces) {
             if (p.p.getX() == x && p.p.getY() == y && p.getId() != piece.getId()) {

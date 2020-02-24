@@ -13,6 +13,7 @@ public class WhitePawn extends WhitePiece {
 
 	public WhitePawn(BufferedImage img, Position p, int id) {
 		super(img, p, id);
+		isPawn = true;
 	}
 	
 	@Override

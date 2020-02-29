@@ -28,6 +28,16 @@ public class ImgS {		// Assets
 	public static BufferedImage chessMedievalThumb;
 	public static BufferedImage chessNormalThumb;
 	
+	public static BufferedImage chooseWhiteKnight;
+	public static BufferedImage chooseWhiteBishop;
+	public static BufferedImage chooseWhiteRook;
+	public static BufferedImage chooseWhiteQueen;
+	
+	public static BufferedImage chooseBlackKnight;
+	public static BufferedImage chooseBlackBishop;
+	public static BufferedImage chooseBlackRook;
+	public static BufferedImage chooseBlackQueen;
+	
 	public static String spritePath = "/textures/chessNormal.png";
 		
 	private static BufferedImage loadChessPieceSheet(int x, int y, int width, int height) {
@@ -56,5 +66,15 @@ public class ImgS {		// Assets
 		chessBluePinkThumb = ImageLoader.loadImage("/textures/chessBluePinkThumb.png");
 		chessMedievalThumb = ImageLoader.loadImage("/textures/chessMedievalThumb.png");
 		chessNormalThumb = ImageLoader.loadImage("/textures/chessNormalThumb.png");
+		
+		chooseWhiteKnight = ImageLoader.loadImage("/textures/chooseWhiteKnight.png");
+		chooseWhiteBishop = ImageLoader.loadImage("/textures/chooseWhiteBishop.png");
+		chooseWhiteRook = ImageLoader.loadImage("/textures/chooseWhiteRook.png");
+		chooseWhiteQueen = ImageLoader.loadImage("/textures/chooseWhiteQueen.png");
+		
+		chooseBlackKnight = ImageLoader.loadImage("/textures/chooseBlackKnight.png");
+		chooseBlackBishop = ImageLoader.loadImage("/textures/chooseBlackBishop.png");
+		chooseBlackRook = ImageLoader.loadImage("/textures/chooseBlackRook.png");
+		chooseBlackQueen = ImageLoader.loadImage("/textures/chooseBlackQueen.png");
 	}
 }

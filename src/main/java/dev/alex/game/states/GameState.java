@@ -11,6 +11,9 @@ import dev.alex.game.tile.Tile;
 
 public class GameState extends State {
 
+	public boolean drawChoiceBlack = false;
+	public boolean drawChoice = false;
+	public BufferedImage changeImgTo;
 	public boolean lastWasBlack = true;
 	public boolean pawnChanged = false;
 	public int width;
@@ -46,7 +49,6 @@ public class GameState extends State {
 						newPosX = (Game.mm.getMouseX() - bumpX);
 						int bumpY = (Game.mm.getMouseY() % Tile.rectSize);
 						newPosY = (Game.mm.getMouseY() - bumpY);
-						// System.out.println("waiting");
 						sleep();
 					}
 					if (newPosX != null && newPosY != null) {
@@ -54,77 +56,66 @@ public class GameState extends State {
 							if (newPosX == t.x && newPosY == t.y && t.enterable) {
 								piece.p.setX(newPosX);
 								piece.p.setY(newPosY);
-								if (piece.isPawn && (piece.isBlack && piece.p.getY() == 350)
+								if (piece.isPawn && (piece.isBlack && piece.p.getY() == 350) // Pawn Transform
 										|| piece.isPawn && (!piece.isBlack && piece.p.getY() == 0)) {
-									Rectangle boundsChooseKnight = new Rectangle(100, 100, 75, 75);
-									Rectangle boundsChooseBishop = new Rectangle(220, 100, 75, 75);
-									Rectangle boundsChooseRook = new Rectangle(100, 220, 75, 75);
-									Rectangle boundsChooseQueen = new Rectangle(220, 220, 75, 75);
+									Rectangle boundsChooseKnight = new Rectangle(0, 0, 200, 200);
+									Rectangle boundsChooseBishop = new Rectangle(200, 0, 200, 200);
+									Rectangle boundsChooseRook = new Rectangle(0, 200, 200, 200);
+									Rectangle boundsChooseQueen = new Rectangle(200, 200, 200, 200);
 									Game.mm.setLeftPressed(false);
 									pawnChanged = false;
-									BufferedImage changeImgTo = ImgS.ImgWhiteKing;
-									while (!pawnChanged) {
+									piece.setImg(null);
+									drawChoice = true;
+									if (piece.isBlack) {
+										drawChoiceBlack = true;
+									} else {
+										drawChoiceBlack = false;
+									}
+									while (!Game.mm.getLeftPressed()) {
+										Launcher.game.render();
 										mouseX = Game.mm.getMouseX();
 										mouseY = Game.mm.getMouseY();
 										sleep();
-										if (piece.isBlack) {
-											if (boundsChooseKnight.contains(mouseX, mouseY)
-													&& Game.mm.getLeftPressed()) {
-												System.out.println("knight");
-												changeImgTo = ImgS.ImgBlackKnight;
-												piece = new BlackKnight(ImgS.ImgBlackKnight, piece.p, piece.getId());
-												pawnChanged = true;
-											} else if (boundsChooseBishop.contains(mouseX, mouseY)
-													&& Game.mm.getLeftPressed()) {
-												System.out.println("bishop");
-												changeImgTo = ImgS.ImgBlackBishop;
-												piece = new BlackBishop(ImgS.ImgBlackBishop, piece.p, piece.getId());
-												pawnChanged = true;
-											} else if (boundsChooseRook.contains(mouseX, mouseY)
-													&& Game.mm.getLeftPressed()) {
-												System.out.println("rook");
-												changeImgTo = ImgS.ImgBlackRook;
-												piece = new BlackRook(ImgS.ImgBlackRook, piece.p, piece.getId());
-												pawnChanged = true;
-											} else if (boundsChooseQueen.contains(mouseX, mouseY)
-													&& Game.mm.getLeftPressed()) {
-												System.out.println("queen");
-												changeImgTo = ImgS.ImgBlackQueen;
-												piece = new BlackQueen(ImgS.ImgBlackQueen, piece.p, piece.getId());
-												pawnChanged = true;
-											}
-										} else if (!piece.isBlack) {
-											if (boundsChooseKnight.contains(mouseX, mouseY)
-													&& Game.mm.getLeftPressed()) {
-												System.out.println("knight");
-												changeImgTo = ImgS.ImgWhiteKnight;
-												piece = new WhiteKnight(ImgS.ImgWhiteKnight, piece.p, piece.getId());
-												pawnChanged = true;
-											} else if (boundsChooseBishop.contains(mouseX, mouseY)
-													&& Game.mm.getLeftPressed()) {
-												System.out.println("bishop");
-												changeImgTo = ImgS.ImgWhiteBishop;
-												piece = new WhiteBishop(ImgS.ImgWhiteBishop, piece.p, piece.getId());
-												pawnChanged = true;
-											} else if (boundsChooseRook.contains(mouseX, mouseY)
-													&& Game.mm.getLeftPressed()) {
-												System.out.println("rook");
-												changeImgTo = ImgS.ImgWhiteRook;
-												piece = new WhiteRook(ImgS.ImgWhiteRook, piece.p, piece.getId());
-												pawnChanged = true;
-											} else if (boundsChooseQueen.contains(mouseX, mouseY)
-													&& Game.mm.getLeftPressed()) {
-												System.out.println("queen");
-												changeImgTo = ImgS.ImgWhiteQueen;
-												piece = new WhiteQueen(ImgS.ImgWhiteQueen, piece.p, piece.getId());
-												pawnChanged = true;
-											}
-										}
-										piece.setImg(changeImgTo);
-										piece.render();
 									}
-
-								}
+									drawChoice = false;
+									if (piece.isBlack) {
+										if (boundsChooseKnight.contains(mouseX, mouseY)) {
+											System.out.println("knight");
+											piece.setImg(ImgS.ImgBlackKnight);
+											piece.setMakeDotsOf("knight");
+										} else if (boundsChooseBishop.contains(mouseX, mouseY)) {
+											System.out.println("bishop");
+											piece.setImg(ImgS.ImgBlackBishop);
+											piece.setMakeDotsOf("bishop");
+										} else if (boundsChooseRook.contains(mouseX, mouseY)) {
+											System.out.println("rook");
+											piece.setImg(ImgS.ImgBlackRook);
+											piece.setMakeDotsOf("rook");
+										} else if (boundsChooseQueen.contains(mouseX, mouseY)) {
+											System.out.println("queen");
+											piece.setImg(ImgS.ImgBlackQueen);
+											piece.setMakeDotsOf("queen");
+										}
+									} else if (!piece.isBlack) {
+										if (boundsChooseKnight.contains(mouseX, mouseY)) {
+											System.out.println("knight");
+											piece.setImg(ImgS.ImgWhiteKnight);
+											piece.setMakeDotsOf("knight");
+										} else if (boundsChooseBishop.contains(mouseX, mouseY)) {
+											System.out.println("bishop");
+											piece.setImg(ImgS.ImgWhiteBishop);
+											piece.setMakeDotsOf("bishop");
+										} else if (boundsChooseRook.contains(mouseX, mouseY)) {
+											System.out.println("rook");
+											piece.setImg(ImgS.ImgWhiteRook);
+											piece.setMakeDotsOf("rook");
+										} else if (boundsChooseQueen.contains(mouseX, mouseY)) {
+											System.out.println("queen");
+											piece.setImg(ImgS.ImgWhiteQueen);
+											piece.setMakeDotsOf("queen");
+										}
+									}
+								} // Transform ende
 								if (piece == PieceS.whiteKing && !piece.wasMoved && piece.p.getX() == Tile.rectSize
 										&& piece.p.getY() == 7 * Tile.rectSize) {
 									PieceS.whiteRook.p.setX(2 * Tile.rectSize);
@@ -181,6 +172,29 @@ public class GameState extends State {
 		this.g = g;
 		drawBoard();
 		drawPieces();
+		if (drawChoice) {
+			g.setColor(new Color(200, 200, 200));
+			g.fillRect(100, 100, 100, 100);
+			g.fillRect(100, 200, 100, 100);
+			g.fillRect(200, 100, 100, 100);
+			g.fillRect(200, 200, 100, 100);
+			g.setColor(new Color(0, 0, 0));
+			g.drawRect(100, 100, 100, 100);
+			g.drawRect(200, 100, 100, 100);
+			g.drawRect(100, 200, 100, 100);
+			g.drawRect(200, 200, 100, 100);
+			if (drawChoiceBlack) {
+				g.drawImage(ImgS.chooseBlackKnight, 100, 100, null);
+				g.drawImage(ImgS.chooseBlackBishop, 200, 100, null);
+				g.drawImage(ImgS.chooseBlackRook, 100, 200, null);
+				g.drawImage(ImgS.chooseBlackQueen, 200, 200, null);
+			} else {
+				g.drawImage(ImgS.chooseWhiteKnight, 100, 100, null);
+				g.drawImage(ImgS.chooseWhiteBishop, 200, 100, null);
+				g.drawImage(ImgS.chooseWhiteRook, 100, 200, null);
+				g.drawImage(ImgS.chooseWhiteQueen, 200, 200, null);
+			}
+		}
 		if (makeDots) {
 			if (piece != null) {
 				piece.makeDots();

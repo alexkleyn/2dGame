@@ -14,8 +14,22 @@ public class BlackPawn extends BlackPiece {
 		isPawn = true;
 	}
 	
+	
 	@Override
 	public void makeDots() {
+		if (makeDotsOf.equals("pawn"))
+			makeDotsPawn();
+		else if (makeDotsOf.equals("knight"))
+			makeDotsKnight();
+		else if (makeDotsOf.equals("bishop"))
+			makeDotsBishop();
+		else if (makeDotsOf.equals("rook"))
+			makeDotsRook();
+		else if (makeDotsOf.equals("queen"))
+			makeDotsQueen();
+	}
+	
+	public void makeDotsPawn() {
 		boolean isOccupied = false;
 		boolean isOccupied2 = false;
 		Game.g.setColor(Color.red);
@@ -40,5 +54,146 @@ public class BlackPawn extends BlackPiece {
 		isOccupied = false;
 		isOccupied2 = false;
 	}
+	
+	public void makeDotsQueen() {
+        Game.g.setColor(Color.red);
+        for(int x = this.p.getX(); x < width; x += Tile.rectSize) {
+				renderDot(x, this.p.getY());
+			if(isPieceObstructing(this, x, p.getY())) {
+				break;
+			}
+		}
+		for(int x = this.p.getX(); x > -Tile.rectSize; x -= Tile.rectSize) {
+			renderDot(x, this.p.getY());
+			if(isPieceObstructing(this, x, p.getY())) {
+				break;
+			}
+		}
+		
+		
+		for(int y = this.p.getY(); y < width; y+= Tile.rectSize) {
+			renderDot(this.p.getX(), y);
+			if(isPieceObstructing(this, p.getX(), y)) {
+				break;
+			}
+		}
+		for(int y = this.p.getY(); y > -Tile.rectSize; y-= Tile.rectSize) {
+			renderDot(this.p.getX(), y);
+			if(isPieceObstructing(this, p.getX(), y)) {
+				break;
+			}
+		}
 
+        //Diagonalen
+        for (int x = p.getX(), Y = p.getY(); x < width && Y < height; x += Tile.rectSize) {
+            renderDot(x, Y);
+	        if(isPieceObstructing(this, x, Y)) {
+		        break;
+	        }
+            Y += Tile.rectSize;
+        }
+        for (int x = p.getX(), Y = p.getY(); x > -Tile.rectSize && Y > -Tile.rectSize; x -= Tile.rectSize) {
+            renderDot(x, Y);
+	        if(isPieceObstructing(this, x, Y)) {
+		        break;
+	        }
+            Y -= Tile.rectSize;
+        }
+        for (int x = p.getX(), Y = p.getY(); x > -Tile.rectSize && Y < height; x -= Tile.rectSize) {
+            renderDot(x, Y);
+	        if(isPieceObstructing(this, x, Y)) {
+		        break;
+	        }
+            Y += Tile.rectSize;
+        }
+        for (int x = p.getX(), Y = p.getY(); x < width && Y > -Tile.rectSize; x += Tile.rectSize) {
+            renderDot(x, Y);
+	        if(isPieceObstructing(this, x, Y)) {
+		        break;
+	        }
+            Y -= Tile.rectSize;
+        }
+    }
+	
+	public void makeDotsRook() {
+		Game.g.setColor(Color.red);
+		for(int x = this.p.getX(); x < width; x += Tile.rectSize) {
+				renderDot(x, this.p.getY());
+			if(isPieceObstructing(this, x, p.getY())) {
+				break;
+			}
+		}
+		for(int x = this.p.getX(); x > -Tile.rectSize; x -= Tile.rectSize) {
+			renderDot(x, this.p.getY());
+			if(isPieceObstructing(this, x, p.getY())) {
+				break;
+			}
+		}
+		
+		
+		for(int y = this.p.getY(); y < width; y+= Tile.rectSize) {
+			renderDot(this.p.getX(), y);
+			if(isPieceObstructing(this, p.getX(), y)) {
+				break;
+			}
+		}
+		for(int y = this.p.getY(); y > -Tile.rectSize; y-= Tile.rectSize) {
+			renderDot(this.p.getX(), y);
+			if(isPieceObstructing(this, p.getX(), y)) {
+				break;
+			}
+		}
+	}
+	
+	public void makeDotsBishop() {
+		Game.g.setColor(Color.red);
+		//Diagonalen
+		//Unten rechts
+		for(int x = p.getX() + Tile.rectSize, Y = p.getY() + Tile.rectSize; x < width && Y < height; x += Tile.rectSize) {
+			renderDot(x, Y);
+			if(isPieceObstructing(this, x, Y)) {
+				break;
+			}
+			Y += Tile.rectSize;
+		}
+		//Oben links
+		for(int x = p.getX() - Tile.rectSize, Y = p.getY() -Tile.rectSize; x > -Tile.rectSize && Y > -Tile.rectSize; x -= Tile.rectSize) {
+			renderDot(x, Y);
+			if(isPieceObstructing(this, x, Y)) {
+				break;
+			}
+			Y -= Tile.rectSize;
+		}
+		//Unten links
+		for(int x = p.getX() - Tile.rectSize, Y = p.getY() + Tile.rectSize; x > -Tile.rectSize && Y < height; x -= Tile.rectSize) {
+			renderDot(x, Y);
+			if(isPieceObstructing(this, x, Y)) {
+				break;
+			}
+			Y += Tile.rectSize;
+		}
+		//Oben rechts
+		for(int x = p.getX() + Tile.rectSize, Y = p.getY() - Tile.rectSize; x < width && Y > -Tile.rectSize; x += Tile.rectSize) {
+			renderDot(x, Y);
+			if(isPieceObstructing(this, x, Y)) {
+				break;
+			}
+			Y -= Tile.rectSize;
+		}
+	}
+	
+	public void makeDotsKnight() {
+		Game.g.setColor(Color.red);
+		renderDot(p.getX() + 2*Tile.rectSize, p.getY() + Tile.rectSize);
+		renderDot(p.getX() + 2*Tile.rectSize, p.getY() - Tile.rectSize);
+		
+		renderDot(p.getX() - 2*Tile.rectSize, p.getY() + Tile.rectSize);
+		renderDot(p.getX() - 2*Tile.rectSize, p.getY() - Tile.rectSize);
+		
+		renderDot(p.getX() + Tile.rectSize, p.getY() + 2*Tile.rectSize);
+		renderDot(p.getX() - Tile.rectSize, p.getY() + 2*Tile.rectSize);
+		
+		renderDot(p.getX() + Tile.rectSize, p.getY() - 2*Tile.rectSize);
+		renderDot(p.getX() - Tile.rectSize, p.getY() - 2*Tile.rectSize);
+	}
 }

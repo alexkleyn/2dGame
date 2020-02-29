@@ -3,12 +3,14 @@ package dev.alex.game.pieces;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import dev.alex.game.Game;
+import dev.alex.game.Launcher;
 import dev.alex.game.gfx.chessGfx.Position;
 import dev.alex.game.states.GameState;
 import dev.alex.game.tile.Tile;
 
 public class Piece {
 
+	protected String makeDotsOf = "pawn";
 	public boolean canRochadeRight = true;
 	public boolean canRochadeLeft = true;
 	public boolean wasMoved = false;
@@ -133,4 +135,12 @@ public class Piece {
         }
         return false;
     }
+    
+    public String getMakeDotsOf() {
+		return makeDotsOf;
+	}
+	
+	public void setMakeDotsOf(String s) {
+		makeDotsOf = s;
+	}
 } //End of class

@@ -67,5 +67,57 @@ public class WhiteKing extends WhitePiece{
 			}
 		}
 	}
+	
+	public void loadEnterableTiles() {
+		resetEnterableTiles();
+		addEnterableTile(p.getX() + Tile.rectSize, p.getY() + Tile.rectSize);
+		addEnterableTile(p.getX() + Tile.rectSize, p.getY());
+		addEnterableTile(p.getX() + Tile.rectSize, p.getY() - Tile.rectSize);
+		
+		addEnterableTile(p.getX(), p.getY() + Tile.rectSize);
+		addEnterableTile(p.getX(), p.getY());
+		addEnterableTile(p.getX(), p.getY() - Tile.rectSize);
+		
+		addEnterableTile(p.getX() - Tile.rectSize, p.getY() + Tile.rectSize);
+		addEnterableTile(p.getX() - Tile.rectSize, p.getY());
+		addEnterableTile(p.getX() - Tile.rectSize, p.getY() - Tile.rectSize);
+		
+		
+		if (!wasMoved && !PieceS.whiteRook.wasMoved) {
+			for (Piece p : Piece.pieces) {
+				if (p.p.getX() == Tile.rectSize && p.p.getY() == 7*Tile.rectSize) {
+					canRochadeLeft = false;
+				}
+			}
+			for (Piece p : Piece.pieces) {
+				if (p.p.getX() == 2*Tile.rectSize && p.p.getY() == 7*Tile.rectSize) {
+					canRochadeLeft = false;
+				}
+			}
+			if (canRochadeLeft) {
+				addEnterableTile(Tile.rectSize, 7*Tile.rectSize);
+			}
+		}
+		if (!wasMoved && !PieceS.whiteRook2.wasMoved) {
+			for (Piece p : Piece.pieces) {
+				if (p.p.getX() == 5*Tile.rectSize && p.p.getY() == 7*Tile.rectSize) {
+					canRochadeRight = false;
+				}
+			}
+			for (Piece p : Piece.pieces) {
+				if (p.p.getX() == 6*Tile.rectSize && p.p.getY() == 7*Tile.rectSize) {
+					canRochadeRight = false;
+				}
+			}
+			for (Piece p : Piece.pieces) {
+				if (p.p.getX() == 4*Tile.rectSize && p.p.getY() == 7*Tile.rectSize) {
+					canRochadeRight = false;
+				}
+			}
+			if (canRochadeRight) {
+				addEnterableTile(5*Tile.rectSize, 7*Tile.rectSize);
+			}
+		}
+	}
 
 }

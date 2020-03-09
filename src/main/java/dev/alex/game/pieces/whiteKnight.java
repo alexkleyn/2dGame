@@ -28,5 +28,20 @@ public class WhiteKnight extends WhitePiece {
 		renderDot(p.getX() + Tile.rectSize, p.getY() - 2*Tile.rectSize);
 		renderDot(p.getX() - Tile.rectSize, p.getY() - 2*Tile.rectSize);
 	}
+	
+	public void loadEnterableTiles() {
+		resetEnterableTiles();
+		addEnterableTile(p.getX() + 2*Tile.rectSize, p.getY() + Tile.rectSize);
+		addEnterableTile(p.getX() + 2*Tile.rectSize, p.getY() - Tile.rectSize);
+		
+		addEnterableTile(p.getX() - 2*Tile.rectSize, p.getY() + Tile.rectSize);
+		addEnterableTile(p.getX() - 2*Tile.rectSize, p.getY() - Tile.rectSize);
+		
+		addEnterableTile(p.getX() + Tile.rectSize, p.getY() + 2*Tile.rectSize);
+		addEnterableTile(p.getX() - Tile.rectSize, p.getY() + 2*Tile.rectSize);
+		
+		addEnterableTile(p.getX() + Tile.rectSize, p.getY() - 2*Tile.rectSize);
+		addEnterableTile(p.getX() - Tile.rectSize, p.getY() - 2*Tile.rectSize);
+	}
 
 }

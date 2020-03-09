@@ -16,35 +16,80 @@ public class BlackBishop extends BlackPiece {
 	@Override
 	public void makeDots() {
 		Game.g.setColor(Color.red);
-		//Diagonalen
-		//Unten rechts
-		for(int x = p.getX() + Tile.rectSize, Y = p.getY() + Tile.rectSize; x < width && Y < height; x += Tile.rectSize) {
+		// Diagonalen
+		// Unten rechts
+		for (int x = p.getX() + Tile.rectSize, Y = p.getY() + Tile.rectSize; x < width
+				&& Y < height; x += Tile.rectSize) {
 			renderDot(x, Y);
-			if(isPieceObstructing(this, x, Y)) {
+			if (isPieceObstructing(this, x, Y)) {
 				break;
 			}
 			Y += Tile.rectSize;
 		}
-		//Oben links
-		for(int x = p.getX() - Tile.rectSize, Y = p.getY() -Tile.rectSize; x > -Tile.rectSize && Y > -Tile.rectSize; x -= Tile.rectSize) {
+		// Oben links
+		for (int x = p.getX() - Tile.rectSize, Y = p.getY() - Tile.rectSize; x > -Tile.rectSize
+				&& Y > -Tile.rectSize; x -= Tile.rectSize) {
 			renderDot(x, Y);
-			if(isPieceObstructing(this, x, Y)) {
+			if (isPieceObstructing(this, x, Y)) {
 				break;
 			}
 			Y -= Tile.rectSize;
 		}
-		//Unten links
-		for(int x = p.getX() - Tile.rectSize, Y = p.getY() + Tile.rectSize; x > -Tile.rectSize && Y < height; x -= Tile.rectSize) {
+		// Unten links
+		for (int x = p.getX() - Tile.rectSize, Y = p.getY() + Tile.rectSize; x > -Tile.rectSize
+				&& Y < height; x -= Tile.rectSize) {
 			renderDot(x, Y);
-			if(isPieceObstructing(this, x, Y)) {
+			if (isPieceObstructing(this, x, Y)) {
 				break;
 			}
 			Y += Tile.rectSize;
 		}
-		//Oben rechts
-		for(int x = p.getX() + Tile.rectSize, Y = p.getY() - Tile.rectSize; x < width && Y > -Tile.rectSize; x += Tile.rectSize) {
+		// Oben rechts
+		for (int x = p.getX() + Tile.rectSize, Y = p.getY() - Tile.rectSize; x < width
+				&& Y > -Tile.rectSize; x += Tile.rectSize) {
 			renderDot(x, Y);
-			if(isPieceObstructing(this, x, Y)) {
+			if (isPieceObstructing(this, x, Y)) {
+				break;
+			}
+			Y -= Tile.rectSize;
+		}
+	}
+
+	public void loadEnterableTiles() {
+		resetEnterableTiles();
+		// Diagonalen
+		// Unten rechts
+		for (int x = p.getX() + Tile.rectSize, Y = p.getY() + Tile.rectSize; x < width
+				&& Y < height; x += Tile.rectSize) {
+			addEnterableTile(x, Y);
+			if (isPieceObstructing(this, x, Y)) {
+				break;
+			}
+			Y += Tile.rectSize;
+		}
+		// Oben links
+		for (int x = p.getX() - Tile.rectSize, Y = p.getY() - Tile.rectSize; x > -Tile.rectSize
+				&& Y > -Tile.rectSize; x -= Tile.rectSize) {
+			addEnterableTile(x, Y);
+			if (isPieceObstructing(this, x, Y)) {
+				break;
+			}
+			Y -= Tile.rectSize;
+		}
+		// Unten links
+		for (int x = p.getX() - Tile.rectSize, Y = p.getY() + Tile.rectSize; x > -Tile.rectSize
+				&& Y < height; x -= Tile.rectSize) {
+			addEnterableTile(x, Y);
+			if (isPieceObstructing(this, x, Y)) {
+				break;
+			}
+			Y += Tile.rectSize;
+		}
+		// Oben rechts
+		for (int x = p.getX() + Tile.rectSize, Y = p.getY() - Tile.rectSize; x < width
+				&& Y > -Tile.rectSize; x += Tile.rectSize) {
+			addEnterableTile(x, Y);
+			if (isPieceObstructing(this, x, Y)) {
 				break;
 			}
 			Y -= Tile.rectSize;

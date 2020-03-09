@@ -197,5 +197,168 @@ public class WhitePawn extends WhitePiece {
 			Y -= Tile.rectSize;
 		}
 	}
+	
+	/////////////////////////////////////////////////////////////////////
+	
+	public void loadEnterableTiles() {
+		resetEnterableTiles();
+		if (makeDotsOf.equals("pawn"))
+			loadEnterableTilesPawn();
+		else if (makeDotsOf.equals("knight"))
+			loadEnterableTilesKnight();
+		else if (makeDotsOf.equals("bishop"))
+			loadEnterableTilesBishop();
+		else if (makeDotsOf.equals("rook"))
+			loadEnterableTilesRook();
+		else if (makeDotsOf.equals("queen"))
+			loadEnterableTilesQueen();
+	}
+	
+	public void loadEnterableTilesPawn() {
+		addEnterableTile(p.getX() + 50, p.getY() - 50);
+		addEnterableTile(p.getX() - 50, p.getY() - 50);
+	}
+	
+	public void loadEnterableTilesQueen() {
+		Game.g.setColor(Color.red);
+		for(int x = this.p.getX(); x < width; x += Tile.rectSize) {
+			addEnterableTile(x, this.p.getY());
+			if(isPieceObstructing(this, x, p.getY())) {
+				break;
+			}
+		}
+		for(int x = this.p.getX(); x > -Tile.rectSize; x -= Tile.rectSize) {
+			addEnterableTile(x, this.p.getY());
+			if(isPieceObstructing(this, x, p.getY())) {
+				break;
+			}
+		}
+		
+		
+		for(int y = this.p.getY(); y < width; y+= Tile.rectSize) {
+			addEnterableTile(this.p.getX(), y);
+			if(isPieceObstructing(this, p.getX(), y)) {
+				break;
+			}
+		}
+		for(int y = this.p.getY(); y > -Tile.rectSize; y-= Tile.rectSize) {
+			addEnterableTile(this.p.getX(), y);
+			if(isPieceObstructing(this, p.getX(), y)) {
+				break;
+			}
+		}
+
+		//Diagonalen
+		for (int x = p.getX(), Y = p.getY(); x < width && Y < height; x += Tile.rectSize) {
+			addEnterableTile(x, Y);
+			if(isPieceObstructing(this, x, Y)) {
+				break;
+			}
+			Y += Tile.rectSize;
+		}
+		for (int x = p.getX(), Y = p.getY(); x > -Tile.rectSize && Y > -Tile.rectSize; x -= Tile.rectSize) {
+			addEnterableTile(x, Y);
+			if(isPieceObstructing(this, x, Y)) {
+				break;
+			}
+			Y -= Tile.rectSize;
+		}
+		for (int x = p.getX(), Y = p.getY(); x > -Tile.rectSize && Y < height; x -= Tile.rectSize) {
+			addEnterableTile(x, Y);
+			if(isPieceObstructing(this, x, Y)) {
+				break;
+			}
+			Y += Tile.rectSize;
+		}
+		for (int x = p.getX(), Y = p.getY(); x < width && Y > -Tile.rectSize; x += Tile.rectSize) {
+			addEnterableTile(x, Y);
+			if(isPieceObstructing(this, x, Y)) {
+				break;
+			}
+			Y -= Tile.rectSize;
+		}
+	}
+	
+	public void loadEnterableTilesRook() {
+        Game.g.setColor(Color.red);
+        for (int x = this.p.getX(); x < width; x += Tile.rectSize) {
+            addEnterableTile(x, this.p.getY());
+            if (isPieceObstructing(this, x, p.getY())) {
+                break;
+            }
+        }
+        for (int x = this.p.getX(); x > -Tile.rectSize; x -= Tile.rectSize) {
+            addEnterableTile(x, this.p.getY());
+	        if(isPieceObstructing(this, x, p.getY())) {
+		        break;
+	        }
+        }
+
+
+        for (int y = this.p.getY(); y < width; y += Tile.rectSize) {
+            addEnterableTile(this.p.getX(), y);
+	        if(isPieceObstructing(this, p.getX(), y)) {
+		        break;
+	        }
+        }
+        for (int y = this.p.getY(); y > -Tile.rectSize; y -= Tile.rectSize) {
+            addEnterableTile(this.p.getX(), y);
+	        if(isPieceObstructing(this, p.getX(), y)) {
+		        break;
+	        }
+        }
+    }
+	
+	public void loadEnterableTilesKnight() {
+		Game.g.setColor(Color.red);
+		addEnterableTile(p.getX() + 2*Tile.rectSize, p.getY() + Tile.rectSize);
+		addEnterableTile(p.getX() + 2*Tile.rectSize, p.getY() - Tile.rectSize);
+		
+		addEnterableTile(p.getX() - 2*Tile.rectSize, p.getY() + Tile.rectSize);
+		addEnterableTile(p.getX() - 2*Tile.rectSize, p.getY() - Tile.rectSize);
+		
+		addEnterableTile(p.getX() + Tile.rectSize, p.getY() + 2*Tile.rectSize);
+		addEnterableTile(p.getX() - Tile.rectSize, p.getY() + 2*Tile.rectSize);
+		
+		addEnterableTile(p.getX() + Tile.rectSize, p.getY() - 2*Tile.rectSize);
+		addEnterableTile(p.getX() - Tile.rectSize, p.getY() - 2*Tile.rectSize);
+	}
+	
+	public void loadEnterableTilesBishop() {
+		Game.g.setColor(Color.red);
+		//Diagonalen
+		//Unten rechts
+		for(int x = p.getX() + Tile.rectSize, Y = p.getY() + Tile.rectSize; x < width && Y < height; x += Tile.rectSize) {
+			addEnterableTile(x, Y);
+			if(isPieceObstructing(this, x, Y)) {
+				break;
+			}
+			Y += Tile.rectSize;
+		}
+		//Oben links
+		for(int x = p.getX() - Tile.rectSize, Y = p.getY() -Tile.rectSize; x > -Tile.rectSize && Y > -Tile.rectSize; x -= Tile.rectSize) {
+			addEnterableTile(x, Y);
+			if(isPieceObstructing(this, x, Y)) {
+				break;
+			}
+			Y -= Tile.rectSize;
+		}
+		//Unten links
+		for(int x = p.getX() - Tile.rectSize, Y = p.getY() + Tile.rectSize; x > -Tile.rectSize && Y < height; x -= Tile.rectSize) {
+			addEnterableTile(x, Y);
+			if(isPieceObstructing(this, x, Y)) {
+				break;
+			}
+			Y += Tile.rectSize;
+		}
+		//Oben rechts
+		for(int x = p.getX() + Tile.rectSize, Y = p.getY() - Tile.rectSize; x < width && Y > -Tile.rectSize; x += Tile.rectSize) {
+			addEnterableTile(x, Y);
+			if(isPieceObstructing(this, x, Y)) {
+				break;
+			}
+			Y -= Tile.rectSize;
+		}
+	}
 
 }

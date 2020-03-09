@@ -73,4 +73,64 @@ public class BlackQueen extends BlackPiece {
             Y -= Tile.rectSize;
         }
     }
+    
+    public void loadEnterableTiles() {
+    	resetEnterableTiles();
+		for(int x = this.p.getX(); x < width; x += Tile.rectSize) {
+			addEnterableTile(x, this.p.getY());
+			if(isPieceObstructing(this, x, p.getY())) {
+				break;
+			}
+		}
+		for(int x = this.p.getX(); x > -Tile.rectSize; x -= Tile.rectSize) {
+			addEnterableTile(x, this.p.getY());
+			if(isPieceObstructing(this, x, p.getY())) {
+				break;
+			}
+		}
+		
+		
+		for(int y = this.p.getY(); y < width; y+= Tile.rectSize) {
+			addEnterableTile(this.p.getX(), y);
+			if(isPieceObstructing(this, p.getX(), y)) {
+				break;
+			}
+		}
+		for(int y = this.p.getY(); y > -Tile.rectSize; y-= Tile.rectSize) {
+			addEnterableTile(this.p.getX(), y);
+			if(isPieceObstructing(this, p.getX(), y)) {
+				break;
+			}
+		}
+
+		//Diagonalen
+		for (int x = p.getX(), Y = p.getY(); x < width && Y < height; x += Tile.rectSize) {
+			addEnterableTile(x, Y);
+			if(isPieceObstructing(this, x, Y)) {
+				break;
+			}
+			Y += Tile.rectSize;
+		}
+		for (int x = p.getX(), Y = p.getY(); x > -Tile.rectSize && Y > -Tile.rectSize; x -= Tile.rectSize) {
+			addEnterableTile(x, Y);
+			if(isPieceObstructing(this, x, Y)) {
+				break;
+			}
+			Y -= Tile.rectSize;
+		}
+		for (int x = p.getX(), Y = p.getY(); x > -Tile.rectSize && Y < height; x -= Tile.rectSize) {
+			addEnterableTile(x, Y);
+			if(isPieceObstructing(this, x, Y)) {
+				break;
+			}
+			Y += Tile.rectSize;
+		}
+		for (int x = p.getX(), Y = p.getY(); x < width && Y > -Tile.rectSize; x += Tile.rectSize) {
+			addEnterableTile(x, Y);
+			if(isPieceObstructing(this, x, Y)) {
+				break;
+			}
+			Y -= Tile.rectSize;
+		}
+	}
 }

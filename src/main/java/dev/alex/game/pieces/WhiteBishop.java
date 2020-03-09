@@ -51,5 +51,39 @@ public class WhiteBishop extends WhitePiece {
 			Y -= Tile.rectSize;
 		}
 	}
+	
+	public void loadEnterableTiles() {
+		
+		resetEnterableTiles();
+		//Diagonalen
+		for (int x = p.getX(), Y = p.getY(); x < width && Y < height; x += Tile.rectSize) {
+			addEnterableTile(x, Y);
+			if(isPieceObstructing(this, x, Y)) {
+				break;
+			}
+			Y += Tile.rectSize;
+		}
+		for (int x = p.getX(), Y = p.getY(); x > -Tile.rectSize && Y > -Tile.rectSize; x -= Tile.rectSize) {
+			addEnterableTile(x, Y);
+			if(isPieceObstructing(this, x, Y)) {
+				break;
+			}
+			Y -= Tile.rectSize;
+		}
+		for (int x = p.getX(), Y = p.getY(); x > -Tile.rectSize && Y < height; x -= Tile.rectSize) {
+			addEnterableTile(x, Y);
+			if(isPieceObstructing(this, x, Y)) {
+				break;
+			}
+			Y += Tile.rectSize;
+		}
+		for (int x = p.getX(), Y = p.getY(); x < width && Y > -Tile.rectSize; x += Tile.rectSize) {
+			addEnterableTile(x, Y);
+			if(isPieceObstructing(this, x, Y)) {
+				break;
+			}
+			Y -= Tile.rectSize;
+		}
+	}
 
 }
